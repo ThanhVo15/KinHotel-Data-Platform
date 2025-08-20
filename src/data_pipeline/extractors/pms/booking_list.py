@@ -1,4 +1,5 @@
 import asyncio
+import aiohttp
 import logging
 from typing import Any, Dict, List, Optional
 from datetime import datetime, timedelta, timezone
@@ -43,6 +44,54 @@ class BookingListExtractor(PMSExtractor):
             except Exception as e:
                 self.logger.error(f"Error parsing record: {str(e)}")
         return flattened
+    async def _perform_extraction(self, 
+                                  session: aiohttp.ClientSession, 
+                                  branch_id: int, 
+                                  **kwargs) -> List[Dict[str, Any]]:
+        """
+        Chỉ tập trung vào logic cốt lõi: phân trang và thu thập dữ liệu.
+        """
+        all_records = []
+        page = 1
+        url = f"{self.base_url}{self.ENDPOINT}"
+
+        while True:
+            params = {**kwargs, 'page': page, 'limit': kwargs.get("limit", 100)}
+            self.logger.info(f"🔍 Fetching page {page} for branch {branch_id}...")
+
+            data, status_code = await self._make_request(session, url, params)
+
+            if status_code >= 400:
+                self.logger.warning(f"⚠️ Received status {status_code}. Stopping pagination.")
+                break
+            
+            records = self._parse_response(data)
+            if not records:
+                self.logger.info(f"✅ No more records found. Pagination complete.")
+                break
+
+            all_records.extend(records)
+            page += 1
+            await asyncio.sleep(0.1)
+        
+        # Chỉ cần lưu timestamp ở đây nếu thành công
+        run_end_time = kwargs.get("created_date_to", datetime.now(timezone.utc))
+
+        if isinstance(run_end_time, str):
+        # Chuyển đổi chuỗi ISO thành đối tượng datetime
+            run_end_time = datetime.fromisoformat(run_end_time)
+    
+    # Đảm bảo datetime có timezone
+        if run_end_time.tzinfo is None:
+            run_end_time = run_end_time.replace(tzinfo=timezone.utc)
+        
+        save_last_run_timestamp(
+            source=self.ENDPOINT,
+            branch_id=branch_id,
+            timestamp=run_end_time
+        )
+            
+        return all_records
     
     async def extract_async(self, 
                         branch_id: int =1, 
@@ -84,10 +133,19 @@ class BookingListExtractor(PMSExtractor):
 
             run_end_time = kwargs.get("created_date_to", datetime.now(timezone.utc))
 
+            run_end_time = kwargs.get("created_date_to", datetime.now(timezone.utc))
+            if isinstance(run_end_time, str):
+                # Chuyển đổi chuỗi ISO thành đối tượng datetime
+                run_end_time = datetime.fromisoformat(run_end_time)
+            
+            # Đảm bảo datetime có timezone
+            if run_end_time.tzinfo is None:
+                run_end_time = run_end_time.replace(tzinfo=timezone.utc)
+                
             save_last_run_timestamp(
                 source= self.ENDPOINT,
                 branch_id= branch_id,
-                timestamp= run_end_time.astimezone(timezone.utc)
+                timestamp= run_end_time
             )
 
             return ExtractionResult(

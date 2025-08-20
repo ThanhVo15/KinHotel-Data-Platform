@@ -20,6 +20,7 @@ class ExtractionResult:
     end_date: Optional[str] = None
     created_date_from: Optional[datetime] = None  
     created_date_to: Optional[datetime] = None
+    check_out_date: Optional[datetime] = None
     
     @property
     def is_success(self) -> bool:

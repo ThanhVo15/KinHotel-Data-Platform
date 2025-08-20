@@ -2,7 +2,8 @@ import aiohttp
 import asyncio
 import logging
 from typing import Dict, Any, List, Optional, Callable
-from datetime import datetime, timedelta, timezone
+from abc import abstractmethod
+from datetime import datetime, timezone
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 from ..abstract_extractor import AbstractExtractor, ExtractionResult
@@ -59,7 +60,7 @@ class PMSExtractor(AbstractExtractor):
                             params: Dict) -> Any:
         self.logger.debug(f"GET {url} with params {params}")
         async with session.get(url, params=params) as repsone:
-            if repsone.status in RETRY_STATUS_CODES:
+            if repsone.status in self.RETRY_STATUS_CODES:
                 repsone.raise_for_status()
             return await repsone.json(), repsone.status
 
@@ -119,39 +120,48 @@ class PMSExtractor(AbstractExtractor):
             logger.error(f"❌ Parsing {endpoint} failed: {e}")
             return []
     
+    @abstractmethod
+    async def _perform_extraction(self, 
+                                  session: aiohttp.ClientSession, 
+                                  branch_id: int, 
+                                  **kwargs) -> List[Any]:
+        """
+        Lớp con phải implement logic cốt lõi để lấy dữ liệu tại đây.
+        Chỉ cần trả về một list các record.
+        """
+        pass
+
     async def extract_async(self, 
                             *, 
-                            endpoint: str, 
                             branch_id: int, 
                             **kwargs) -> ExtractionResult:
+        """
+        Bây giờ phương thức này là một template, xử lý tất cả các logic chung.
+        """
         start_time = datetime.now(timezone.utc)
         branch_name = self.TOKEN_BRANCH_MAP.get(branch_id, f"Unknown Branch {branch_id}")
-        
-        params = kwargs.copy()
-        if 'created_date_from' in params and isinstance(params['created_date_from'], datetime):
-            params['created_date_from'] = params['created_date_from'].isoformat()
-        if 'created_date_to' in params and isinstance(params['created_date_to'], datetime):
-            params['created_date_to'] = params['created_date_to'].isoformat()
-        
-        url = f"{self.base_url}{endpoint}"
+        source_name = f"PMS:{getattr(self, 'ENDPOINT', 'Unknown')}" # Lấy endpoint từ lớp con
+
         try:
             session = await self._get_session(branch_id)
-            self.logger.info(f"🔍 Extracting PMS data: {branch_name} - {endpoint}")
+            self.logger.info(f"🚀 Starting extraction for {branch_name} - {source_name}")
             
-            data, status_code = await self._make_request(session, url, params=params)
+            # Gọi phương thức trừu tượng mà lớp con phải implement
+            all_records = await self._perform_extraction(session, branch_id, **kwargs)
             
             duration = (datetime.now(timezone.utc) - start_time).total_seconds()
-            record_count = len(data.get("data", []))
             self.logger.info(
-                f"✅ Extracted {record_count} records from {branch_name} "
-                f"for endpoint '{endpoint}' in {duration:.2f}s."
+                f"✅ Extracted {len(all_records)} records from {branch_name} "
+                f"for endpoint '{source_name}' in {duration:.2f}s."
             )
             
             return ExtractionResult(
-                data=data, source=f"PMS:{endpoint}", branch_id=branch_id,
-                branch_name=branch_name, record_count=record_count,
-                created_date_from=kwargs.get('created_date_from'),
-                created_date_to=kwargs.get('created_date_to')
+                data=all_records,
+                source=source_name,
+                branch_id=branch_id,
+                branch_name=branch_name,
+                record_count=len(all_records),
+                **kwargs
             )
         except Exception as e:
             duration = (datetime.now(timezone.utc) - start_time).total_seconds()
@@ -159,10 +169,13 @@ class PMSExtractor(AbstractExtractor):
                 f"❌ Extraction failed for {branch_name} after {duration:.2f}s: {e}"
             )
             return ExtractionResult(
-                data=None, source=f"PMS:{endpoint}", branch_id=branch_id,
-                branch_name=branch_name, status="error", error=str(e),
-                created_date_from=kwargs.get('created_date_from'),
-                created_date_to=kwargs.get('created_date_to')
+                data=None,
+                source=source_name,
+                branch_id=branch_id,
+                branch_name=branch_name,
+                status="error",
+                error=str(e),
+                **kwargs
             )
     
     async def extract_multi_branch(self,
