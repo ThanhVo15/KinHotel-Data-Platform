@@ -39,7 +39,7 @@ class EInvoiceStatusExtractor(PMSExtractor):
                     'check_in_date': booking.get('check_in_date'),
                     'check_out_date': booking.get('check_out_date'),
                     'sale_order_name': None,
-                    'minvoice_signed': None,
+                    'minvoice_signed': None,+
                     'einvoice_option': None,
                 }
                 flattened_records.append(base_record)

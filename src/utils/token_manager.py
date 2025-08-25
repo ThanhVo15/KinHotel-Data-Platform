@@ -128,7 +128,9 @@ class TokenManager:
         if not token:
             raise RuntimeError(f"No token in PMS response: {list(data.keys())}")
         
-        logger.info(f"✅ PMS token: {token[:20]}...")
+        def _mask(t: str) -> str: return (t[:4] + "…" + t[-4:]) if t and len(t) > 8 else "***"
+        logger.info(f"✅ PMS token: {_mask(token)}")
+
         return TokenInfo(
             access_token=token,
             expires_at=datetime.datetime.utcnow() + datetime.timedelta(hours=1),

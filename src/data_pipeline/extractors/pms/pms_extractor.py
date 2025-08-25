@@ -20,7 +20,7 @@ class PMSExtractor(AbstractExtractor):
     PARSERS: Dict[str, Callable[[Any], Any]] = {}
 
     # --- Cấu hình cho logic retry ---
-    RETRY_STATUS_CODES = (500, 502, 503, 504) # Các lỗi phía server đáng để thử lại
+    RETRY_STATUS_CODES = (429, 500, 502, 503, 504)
     MAX_RETRIES = 3
     RETRY_WAIT_MULTIPLIER = 1 
     RETRY_MAX_WAIT = 10
@@ -59,10 +59,16 @@ class PMSExtractor(AbstractExtractor):
                             url: str,
                             params: Dict) -> Any:
         self.logger.debug(f"GET {url} with params {params}")
-        async with session.get(url, params=params) as repsone:
-            if repsone.status in self.RETRY_STATUS_CODES:
-                repsone.raise_for_status()
-            return await repsone.json(), repsone.status
+        async with session.get(url, params=params) as resp:
+            if resp.status in self.RETRY_STATUS_CODES:
+                resp.raise_for_status()
+            try:
+                return await resp.json(), resp.status
+            except Exception:
+                text = await resp.text()
+                self.logger.error(f"Non-JSON response: {text[:300]}")
+                raise
+
 
     def _get_base_token(self) -> str:
         """Get base token using /utils/token_manager.py"""
