@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 
 # --- CHANGE: Thay đổi đường dẫn này cho đúng với cấu trúc dự án của bạn ---
-from src.data_pipeline.extractors.pms.booking_list import BookingListExtractor
+from data_pipeline.extractors.pms.booking import BookingListExtractor
 
 async def main():
     """

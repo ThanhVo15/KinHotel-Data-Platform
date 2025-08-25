@@ -13,7 +13,8 @@ from typing import Optional
 
 logger = logging.getLogger(__name__)
 
-CACHE_FILE = Path("src/cache/extraction_state.json")
+CACHE_FILE = Path(__file__).resolve().parent.parent / "cache" / "extraction_state.json"
+
 
 def load_last_run_timestamp(source: str, 
                             branch_id: int) -> Optional[datetime]: 
@@ -59,9 +60,10 @@ def save_last_run_timestamp(source: str,
 
     # Standardize all incoming timestamps to UTC before saving.
     if timestamp.tzinfo is None:
-        timestamp = timestamp.astimezone(timezone.utc)
+        timestamp = timestamp.replace(tzinfo=timezone.utc)
     else:
         timestamp = timestamp.astimezone(timezone.utc)
+
 
     state.setdefault(source, {})[str(branch_id)] = timestamp.isoformat()
 
