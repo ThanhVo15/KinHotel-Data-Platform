@@ -4,9 +4,11 @@ import aiohttp
 import logging
 from typing import Any, Dict, List, Optional
 from datetime import datetime, timezone, timedelta
+import random
+import time
 
 from ....utils.state_manager import load_last_run_timestamp, save_last_run_timestamp
-from ...utils.date_params import DateWindow, DateField, ICT
+from ....utils.date_params import DateWindow, DateField, ICT
 from .pms_extractor import PMSExtractor, ExtractionResult
 
 
@@ -23,6 +25,19 @@ class BookingListExtractor(PMSExtractor):
 
     ENDPOINT = "bookings"
     logger = logging.getLogger(__name__)
+
+    async def _perform_extraction(
+        self, 
+        session: aiohttp.ClientSession, 
+        branch_id: int, 
+        params: Dict[str, Any]
+    ) -> List[Dict[str, Any]]:
+        """
+        Implement abstract method required by PMSExtractor.
+        This delegates to our existing _paginate method.
+        """
+        url = f"{self.base_url}{self.ENDPOINT}"
+        return await self._paginate(session, url, params)
 
     # ------------- Parsing -------------
 
@@ -58,33 +73,46 @@ class BookingListExtractor(PMSExtractor):
 
     # ------------- Core pagination (single branch) -------------
 
-    async def _paginate(self, session: aiohttp.ClientSession, url: str, base_params: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """
-        Fetch all pages for a given base URL + params.
-        Returns a list of flattened records.
-        """
+    async def _paginate(self, session, url, base_params):
         all_records: List[Dict[str, Any]] = []
         page = 1
+        limit = int(base_params.get("limit", 50))   # NEW: default 50 (was 100)
 
         while True:
-            params = {**base_params, "page": page, "limit": base_params.get("limit", 100)}
+            params = {**base_params, "page": page, "limit": limit}
             self.logger.info(f"🔍 Fetching page {page} …")
             data, status_code = await self._make_request(session, url, params)
+            self.logger.info(f"🔍 Sleep Fetching page {page} in 5s…")
+            time.sleep(5)
 
             if status_code >= 400:
                 self.logger.warning(f"⚠️ Received status {status_code}. Stopping pagination.")
                 break
-
             records = self._parse_response(data)
-            if not records:
+            got = len(records)
+            if got == 0:
                 self.logger.info("✅ No more records. Pagination complete.")
                 break
 
             all_records.extend(records)
-            page += 1
-            await asyncio.sleep(0.1)  # polite to API
 
-        return all_records
+            # next-page decision via links/meta or batch-size heuristic (unchanged from earlier fix) …
+            meta = data.get("meta") if isinstance(data, dict) else None
+            links = data.get("links") if isinstance(data, dict) else None
+            has_next = False
+            if links and isinstance(links, dict):
+                has_next = bool(links.get("next"))
+            elif meta and isinstance(meta, dict):
+                cur = meta.get("current_page"); last = meta.get("last_page")
+                if isinstance(cur, int) and isinstance(last, int):
+                    has_next = cur < last
+            if not has_next and got < limit:
+                self.logger.info(f"✅ Final page detected (got {got} < limit {limit}).")
+                break
+
+            page += 1
+            await asyncio.sleep(0.6 + random.random() * 0.9)  # slightly larger jitter
+        return all_records  
 
     # ------------- Public extraction APIs -------------
 
@@ -194,31 +222,56 @@ class BookingListExtractor(PMSExtractor):
         lookback_days: int = 1,
         *,
         field: DateField = "check_in",
+        max_concurrent: int = 3,              # <-- thêm tham số chính danh
         **kwargs,
     ) -> Dict[int, ExtractionResult]:
         """
-        Multi-branch incremental extraction.
-        - Uses per-(endpoint,field) state key, so switching field later won't mix windows.
-        - `field="check_in"` now; change to `field="create"` later without touching extractor code.
+        Multi-branch incremental extraction with concurrency cap.
+        State key: f"{ENDPOINT}:{field}" to keep watermarks separate per field.
         """
         if branch_ids is None:
             branch_ids = list(self.TOKEN_BRANCH_MAP.keys())
 
         source_key = f"{self.ENDPOINT}:{field}"
-        tasks: List[asyncio.Task] = []
         now_utc = datetime.now(timezone.utc)
 
-        for branch_id in branch_ids:
-            last_run_utc = load_last_run_timestamp(source=source_key, branch_id=branch_id)
-            start_utc = last_run_utc or (now_utc - timedelta(days=lookback_days))
-            dw = DateWindow.from_utc(start_utc, now_utc, field=field, tz=ICT)
+        sem = asyncio.Semaphore(max_concurrent)
 
-            self.logger.info(
-                f"🗓️ Window for branch {branch_id} ({field}): {dw.start} → {dw.end} (UTC)"
-            )
+        async def _one_branch(bid: int) -> ExtractionResult:
+            async with sem:
+                try:
+                    last_run_utc = load_last_run_timestamp(source=source_key, branch_id=bid)
+                    start_utc = last_run_utc or (now_utc - timedelta(days=lookback_days))
+                    dw = DateWindow.from_utc(start_utc, now_utc, field=field, tz=ICT)
 
-            task = self.extract_async(branch_id=branch_id, date_window=dw, **kwargs)
-            tasks.append(task)
+                    self.logger.info(f"🗓️ Window for branch {bid} ({field}): {dw.start} → {dw.end} (UTC)")
 
-        results = await asyncio.gather(*tasks)
-        return {res.branch_id: res for res in results}
+                    # Lệch pha nhẹ để tránh cùng đập vào page 1
+                    await asyncio.sleep(random.random() * 0.8)
+
+                    # truyền limit/params khác qua kwargs → extract_async → _paginate
+                    return await self.extract_async(branch_id=bid, date_window=dw, **kwargs)
+
+                except Exception as e:
+                    # Không để task vỡ bung: trả về ExtractionResult lỗi
+                    return ExtractionResult(
+                        data=None,
+                        source=f"PMS:{self.ENDPOINT}",
+                        branch_id=bid,
+                        branch_name=self.TOKEN_BRANCH_MAP.get(bid, f"Branch {bid}"),
+                        status="error",
+                        error=str(e),
+                        extracted_at=now_utc,
+                        created_date_from=start_utc if 'start_utc' in locals() else None,
+                        created_date_to=now_utc,
+                    )
+
+        results_list = await asyncio.gather(*[_one_branch(b) for b in branch_ids])
+        return {res.branch_id: res for res in results_list}
+
+
+
+
+
+
+

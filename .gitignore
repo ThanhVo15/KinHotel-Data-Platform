@@ -1,2 +1,4 @@
 .env
 data/
+.\src\cache\GDRIVE_SA_JSON.JSON
+.\src\cache\tokens_cache.json

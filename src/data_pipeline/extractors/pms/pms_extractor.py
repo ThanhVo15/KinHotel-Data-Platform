@@ -13,17 +13,19 @@ from ....utils.token_manager import get_pms_token
 
 logger = logging.getLogger(__name__)
 
+from aiohttp import ClientError, ContentTypeError
+
+# --- Cấu hình cho logic retry ---
+MAX_RETRIES = 3
+RETRY_WAIT_MULTIPLIER = 1 
+RETRY_MAX_WAIT = 10
+RETRY_STATUS_CODES = (429, 500, 502, 503, 504)
+NON_RETRY_STATUS_CODES = (401, 403) 
 
 class PMSExtractor(AbstractExtractor):
     """PMS Data Extractor with multi-branch support. Handles multiple endpoints."""
 
     PARSERS: Dict[str, Callable[[Any], Any]] = {}
-
-    # --- Cấu hình cho logic retry ---
-    RETRY_STATUS_CODES = (429, 500, 502, 503, 504)
-    MAX_RETRIES = 3
-    RETRY_WAIT_MULTIPLIER = 1 
-    RETRY_MAX_WAIT = 10
 
     # Branch mapping từ token suffix đến branch name
     TOKEN_BRANCH_MAP = {
@@ -45,30 +47,48 @@ class PMSExtractor(AbstractExtractor):
         self._base_token: Optional[str] = None
         self._sessions: Dict[int, aiohttp.ClientSession] = {}
 
+    RETRY_STATUS_CODES = (429, 500, 502, 503, 504)
+    NON_RETRY_STATUS_CODES = (401, 403) 
+
     @retry(
         stop=stop_after_attempt(MAX_RETRIES),
         wait=wait_exponential(multiplier=RETRY_WAIT_MULTIPLIER, max=RETRY_MAX_WAIT),
         retry=retry_if_exception_type((aiohttp.ClientError, asyncio.TimeoutError)),
-        before_sleep=lambda retry_state: logger.warning(
-            f"Retrying request (attempt {retry_state.attempt_number}/{MAX_RETRIES})... Waiting {retry_state.next_action.sleep:.2f}s."
+        before_sleep=lambda st: logger.warning(
+            f"Retrying request (attempt {st.attempt_number}/{MAX_RETRIES})... "
+            f"Waiting {getattr(st.next_action, 'sleep', 0):.2f}s."
         )
     )
-
-    async def _make_request(self,
-                            session: aiohttp.ClientSession,
-                            url: str,
-                            params: Dict) -> Any:
-        self.logger.debug(f"GET {url} with params {params}")
+    async def _make_request(self, session: aiohttp.ClientSession, url: str, params: Dict) -> Any:
+        self.logger.debug(f"GET {url} params={params}")
         async with session.get(url, params=params) as resp:
+            # Non-retryable auth/permission
+            if resp.status in self.NON_RETRY_STATUS_CODES:
+                text = await resp.text()
+                self.logger.error(f"Permission error {resp.status} for {url} params={params} body={text[:300]}")
+                raise PermissionError(f"HTTP {resp.status} for {url}")
+
+            # Retryable statuses: log details & honor Retry-After if present
             if resp.status in self.RETRY_STATUS_CODES:
-                resp.raise_for_status()
+                body = await resp.text()
+                ra = resp.headers.get("Retry-After")
+                if ra:
+                    try:
+                        ra_s = int(ra)
+                        self.logger.warning(f"Server {resp.status} with Retry-After={ra_s}s for {url}; sleeping...")
+                        await asyncio.sleep(ra_s)
+                    except Exception:
+                        pass
+                self.logger.warning(f"Server {resp.status} for {url} params={params} body={body[:300]}")
+                resp.raise_for_status()  # triggers Tenacity retry
+
+            # Parse JSON
             try:
                 return await resp.json(), resp.status
-            except Exception:
+            except ContentTypeError:
                 text = await resp.text()
-                self.logger.error(f"Non-JSON response: {text[:300]}")
-                raise
-
+                self.logger.error(f"Non-JSON response (status={resp.status}) for {url}: {text[:300]}")
+                raise RuntimeError(f"Non-JSON response {resp.status}")
 
     def _get_base_token(self) -> str:
         """Get base token using /utils/token_manager.py"""
@@ -76,6 +96,14 @@ class PMSExtractor(AbstractExtractor):
             self._base_token = get_pms_token()
             logger.info(f"🔧 Extracted base token from: {self._base_token[:20]}...")
         return self._base_token
+    
+    def _refresh_base_token(self) -> str:
+        """Force refresh base token (used when server returns 401/403)."""
+        from ....utils.token_manager import get_pms_token  # import cục bộ tránh vòng lặp
+        self._base_token = get_pms_token(force_refresh=True)
+        logger.info("🔄 Refreshed base token")
+        return self._base_token
+
     
     async def close(self):
         self.logger.info("🧹 Closing all network sessions...")
@@ -91,26 +119,25 @@ class PMSExtractor(AbstractExtractor):
         logger.info(f"🔑 Branch {branch_id} token: {branch_token[:20]}...")
         return branch_token
     
-    async def _get_session(self, 
-                           branch_id: int) -> aiohttp.ClientSession:
-        """Get or create aiohttp session for specific branch (unchanged, fixed typo 'sepcific' to 'specific')"""
+    async def _get_session(self, branch_id: int) -> aiohttp.ClientSession:
         if branch_id not in self._sessions or self._sessions[branch_id].closed:
             token = self._get_branch_token(branch_id)
             headers = {
                 "accept": "application/json, text/plain, */*",
                 "authorization": f"Bearer {token}",
+                "user-agent": "Mozilla/5.0",
+                # NEW: some WAFs require these to match the SPA
                 "origin": "https://pms.kinliving.vn",
                 "referer": "https://pms.kinliving.vn/",
-                "user-agent": "Mozilla/5.0"
+                "accept-language": "vi,en-US;q=0.9,en;q=0.8",
             }
-            timeout = aiohttp.ClientTimeout(total = 30)
+            timeout = aiohttp.ClientTimeout(total=30)
             self._sessions[branch_id] = aiohttp.ClientSession(
-                headers = headers,
-                timeout = timeout,
-                connector = aiohttp.TCPConnector(limit=5)
+                headers=headers,
+                timeout=timeout,
+                connector=aiohttp.TCPConnector(limit=5)
             )
             logger.debug(f"🔗 Created session for branch {branch_id}")
-        
         return self._sessions[branch_id]
     
     def _parse_response(self,

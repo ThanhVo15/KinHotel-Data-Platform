@@ -68,6 +68,7 @@ def save_last_run_timestamp(source: str,
     state.setdefault(source, {})[str(branch_id)] = timestamp.isoformat()
 
     try:
+        CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
         with open(CACHE_FILE, "w") as f:
             json.dump(state, f, indent=6)
         logger.debug(f"💾 Saved state for {source}/{branch_id} at {timestamp.isoformat()}")

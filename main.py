@@ -1,73 +1,110 @@
-# main.py
+from src.data_pipeline.extractors.pms.booking import BookingListExtractor
+from src.utils.date_params import DateWindow
+from src.data_pipeline.transformers.pms.fact_booking import FactBookingTransformer
+from src.utils.gdrive_client import GoogleDriveClient
+from src.data_pipeline.loaders.gdrive_loader import GDriveSilverLoader
+from src.utils.emailer import send_etl_summary_email, render_summary_html
+from src.utils.env_utils import get_config
+
 import asyncio
-import logging
-from datetime import datetime
 
-# --- CHANGE: Thay đổi đường dẫn này cho đúng với cấu trúc dự án của bạn ---
-from data_pipeline.extractors.pms.booking import BookingListExtractor
+# main.py (đoạn bạn đưa – cập nhật nhẹ)
 
-async def main():
-    """
-    Hàm chính để chạy pipeline ETL.
-    """
-    # 1. Thiết lập Logging để theo dõi tiến trình
-    logging.basicConfig(
-        level=logging.INFO,
-        format='[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'
-    )
-    logger = logging.getLogger("MAIN_PIPELINE")
+async def run_once(branch_ids):
+    cfg = get_config()
+    root_id = cfg["gdrive"]["folder_id"]
+    drive = GoogleDriveClient(root_folder_id=root_id)
+    loader = GDriveSilverLoader(drive)
 
-    extractor = None
-    start_time = datetime.now()
-    logger.info("🚀 Starting the main ETL pipeline to extract bookings...")
+    extractor = BookingListExtractor()
+    transformer = FactBookingTransformer()  # hoặc BookingTransformer nếu bạn dùng tên cũ
+
+    dw = DateWindow.lookback_days(1, field="check_in")
+
+    run_summaries = []
 
     try:
-        # 2. Khởi tạo Extractor
-        # Lớp này giờ đã chứa tất cả logic cần thiết.
-        extractor = BookingListExtractor()
+        for b in branch_ids:
+            try:
+                # 1) Extract
+                ext = await extractor.extract_async(branch_id=b, date_window=dw, limit=15)
+                if not ext.is_success or not ext.data:
+                    # Ghi nhận branch lỗi nhưng không dừng toàn job
+                    run_summaries.append({
+                        "dataset": "bookings",
+                        "branch_id": b,
+                        "records_out": 0,
+                        "status": ext.status,
+                        "artifacts": [],
+                    })
+                    continue
 
-        # 3. Chạy quá trình lấy dữ liệu tăng trưởng (Incremental Extraction)
-        # BẠN CHỈ CẦN GỌI MỘT HÀM DUY NHẤT NÀY.
-        # Nó sẽ tự động:
-        #  - Tải timestamp của lần chạy cuối.
-        #  - Tính toán khoảng thời gian cần lấy.
-        #  - Chuyển đổi múi giờ sang UTC+7 cho API.
-        #  - Lấy hết tất cả các trang dữ liệu (pagination).
-        #  - Lưu lại timestamp mới sau khi thành công.
-        results = await extractor.extract_bookings_incrementally(
-            lookback_days=7,  # Chỉ dùng cho lần chạy đầu tiên của mỗi chi nhánh
-            limit=100         # Số lượng bản ghi mỗi trang
-        )
+                # 2) Transform
+                tres = transformer.transform(
+                    ext.data,
+                    branch_id=ext.branch_id,
+                    window_start=ext.created_date_from,
+                    window_end=ext.created_date_to
+                )
 
-        # 4. Xử lý và tóm tắt kết quả
-        logger.info("--- PIPELINE RESULTS ---")
-        total_records = 0
-        success_branches = 0
-        for branch_id, result in results.items():
-            if result.is_success:
-                logger.info(f"✅ Branch '{result.branch_name}': SUCCESS - Fetched {result.record_count} records.")
-                total_records += result.record_count
-                success_branches += 1
-                # Tại đây, bạn có thể thêm logic để lưu result.data vào database hoặc file.
-                # Ví dụ: await save_to_database(result.data)
-            else:
-                logger.error(f"❌ Branch '{result.branch_name}': FAILED - Error: {result.error}")
+                # 3) Load
+                if tres.data:
+                    summary = loader.load(
+                        dataset="bookings",
+                        branch_id=ext.branch_id,
+                        records=tres.data,          # list
+                        parquet_batch_size=100_000,
+                        sheet_batch_size=50_000,
+                        max_workers=4
+                    )
+                    artifacts = [
+                        {"kind": a.kind, "name": a.name, "link": a.link, "rows": a.rows}
+                        for a in summary.artifacts
+                    ]
+                else:
+                    artifacts = []
 
-        duration = (datetime.now() - start_time).total_seconds()
-        logger.info("--- PIPELINE SUMMARY ---")
-        logger.info(f"✅ Successfully extracted from {success_branches}/{len(results)} branches.")
-        logger.info(f"📊 Total new records fetched: {total_records}")
-        logger.info(f"⏱️ Total pipeline duration: {duration:.2f} seconds.")
+                run_summaries.append({
+                    "dataset": "bookings",
+                    "branch_id": ext.branch_id,
+                    "records_out": tres.records_out,
+                    "status": tres.status,
+                    "artifacts": artifacts
+                })
 
-    except Exception as e:
-        logger.critical(f"💥 A critical error occurred in the pipeline: {e}", exc_info=True)
+            except PermissionError as pe:
+                # 401/403 của PMS
+                run_summaries.append({
+                    "dataset": "bookings",
+                    "branch_id": b,
+                    "records_out": 0,
+                    "status": f"error:{type(pe).__name__}",
+                    "artifacts": [],
+                })
+            except Exception as e:
+                run_summaries.append({
+                    "dataset": "bookings",
+                    "branch_id": b,
+                    "records_out": 0,
+                    "status": f"error:{type(e).__name__}",
+                    "artifacts": [],
+                })
     finally:
-        # 5. LUÔN LUÔN dọn dẹp tài nguyên, dù thành công hay thất bại
-        if extractor:
-            logger.info("🧹 Cleaning up extractor resources (closing network sessions)...")
-            await extractor.close()
-            logger.info("✅ Cleanup complete.")
+        # Đảm bảo đóng session aiohttp
+        await extractor.close()
+
+    # 5) Email tổng kết
+    html = render_summary_html("KIN PMS ETL - Daily Load (Silver)", run_summaries)
+    send_etl_summary_email(
+        subject="KIN PMS ETL - Silver Load",
+        html_body=html,
+        sender=cfg["email"]["sender"],
+        password=cfg["email"]["password"],
+        recipient=cfg["email"]["recipient"],
+    )
+
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(run_once([1,2,3,4,5,6,7,9,10]))
+
+
