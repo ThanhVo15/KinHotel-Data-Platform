@@ -1,0 +1,316 @@
+﻿booking_line_id,booking_line_sequence_id,check_in_date,check_out_date,room_id,room_name,room_type_id,room_type_name,original_room_type_name,display_room_type_name,price,booking_days,paid_amount,sale_order_name,adult,child,subtotal_price,total_price,cancel_price,cancel_reason,balance,remain_amount,check_in,actual_check_in,check_out,actual_check_out,status,note,booking_id,booking_sequence_id,partner_id,partner_name,gender,booking_line_guest_ids,medium_id,medium_name,source_id,source_name,campaign_id,campaign_name,cms_booking_id,cms_ota_id,cms_booking_source,partner_identification,group_master_name,labels,hotel_travel_agency_name,hotel_travel_agency_id,create_date,group_id,group_master,is_foc,reason_approve_by,foc_level,cancelled_at,attributes.room_no,pricelist.id,pricelist.name,room_status.is_clean,room_status.is_occupied,surveys.is_checkin,surveys.is_checkout,pricelist,room_status
+43513,BL41162,2025-08-31,2025-09-01,11132,STD (101),11037,STD,STD,Standard,809000.0,1,0.0,,1,0,809000.0,809000.0,0.0,False,0.0,0.0,2025-08-31 07:00:00,2025-08-31 08:21:19,2025-09-01 05:00:00,2025-09-01 05:23:26,checkout,"
+ Payment: ota_handle_payment
+Xuấy hóa đơn VAT
+Tên công ty: CÔNG TY TNHH OHMYHOTEL&CO VN
+
+Mã số thuế: 0314937097 Email: accounting.vn@ohmyhotel.com
+
+Địa chỉ: Khu F7-BCD, Tầng 7, Tòa nhà Mach, 127 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.Hồ Chí Minh",33707,B32578,70417,Đào Nguyễn Đăng Khoa,male,[61461],32,Ohmyhotel,18,SO - OTA,,,OT85161756627744,K25083111152H01,OMHT,False,,[],Ohmyhotel,16,2025-08-31 08:09:06,70872,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+43449,BL41098,2025-08-30,2025-08-31,11144,DLX (202),11039,DLX,DLX,Deluxe,1133900.0,1,0.0,,2,0,1133900.0,1133900.0,0.0,False,0.0,0.0,2025-08-30 07:00:00,2025-08-30 15:56:47,2025-08-31 03:32:08,2025-08-31 03:32:11,checkout,"
+ Payment: ota_handle_payment",33655,B32526,70783,XUE CHEN ,male,"[61357, 61383]",46,Trip.Com,18,SO - OTA,,,TR957317565579510,1128142153830297,TRCO,PE1983742,,[],Trip.Com,63,2025-08-30 12:45:53,70783,,False,False,False,False,202,9.0,OTA,True,True,False,False,,
+43432,BL41081,2025-08-31,2025-09-01,11132,STD (101),11037,STD,STD,Standard,999000.0,1,0.0,,2,1,999000.0,999000.0,0.0,thay đỏi lịch trình,0.0,999000.0,2025-08-31 07:00:00,False,2025-09-01 05:00:00,False,cancel,False,33640,B32511,70746,Duy Tân,male,[61319],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-30 09:14:19,70746,,False,False,False,2025-08-30 10:23:53,101,,,True,False,False,False,,
+43431,BL41080,2025-08-31,2025-09-01,11132,STD (101),11037,STD,STD,Standard,999000.0,1,0.0,,2,1,999000.0,999000.0,0.0,tạo nhầm phòng,0.0,999000.0,2025-08-31 07:00:00,False,2025-09-01 05:00:00,False,cancel,False,33639,B32510,40728,HUYNH DUY TAN,male,[61318],15,Walk - In,20,SO - Walk-in,,,False,False,False,082201002941,,[],Walkin,73,2025-08-30 09:11:14,40728,,False,False,False,2025-08-30 09:11:41,101,,,True,False,False,False,,
+43313,BL40962,2025-08-30,2025-08-31,11132,STD (101),11037,STD,STD,Standard,936700.0,1,0.0,,1,0,936700.0,936700.0,0.0,False,0.0,0.0,2025-08-30 07:00:00,2025-08-30 14:48:35,2025-08-31 00:58:24,2025-08-31 00:58:29,checkout,"
+ Payment: ota_handle_payment",33552,B32423,70799,LIU ZHIHUI,male,[61129],46,Trip.Com,18,SO - OTA,,,TREB731756457695,1128142147064348,TRCO,False,,[],Trip.Com,63,2025-08-29 08:54:57,70385,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+43312,BL40961,2025-08-30,2025-08-31,11133,STD (201),11037,STD,STD,Standard,936700.0,1,0.0,,2,0,936700.0,936700.0,0.0,False,0.0,0.0,2025-08-30 07:00:00,2025-08-30 14:48:44,2025-08-31 01:00:01,2025-08-31 01:00:08,checkout,"
+ Payment: ota_handle_payment",33552,B32423,39837,SU CHIEN JUNG ,male,"[61128, 61375]",46,Trip.Com,18,SO - OTA,,,TREB731756457695,1128142147064348,TRCO,False,,[],Trip.Com,63,2025-08-29 08:54:57,70385,,False,False,False,False,201,9.0,OTA,True,False,False,False,,
+43302,BL40951,2025-08-29,2025-08-30,11134,DLX (203),11039,DLX,DLX,Deluxe,1499000.0,1,0.0,,2,0,1499000.0,1549000.0,0.0,False,0.0,0.0,2025-08-29 07:00:00,2025-08-29 08:01:29,2025-08-30 05:00:00,2025-08-29 16:34:07,checkout,mượn 1 hủ tăm,33542,B32413,69565,Nguyễn Lâm Bình,male,"[61110, 61111]",15,Walk - In,20,SO - Walk-in,,,False,False,False,079086008634,,[],Walkin,73,2025-08-29 07:55:52,69565,,False,False,False,False,203,,,True,False,False,False,,
+43236,BL40885,2025-08-29,2025-08-29,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,959000.0,1,0.0,,2,0,959000.0,959000.0,0.0,False,0.0,0.0,2025-08-29 02:00:00,2025-08-29 02:17:21,2025-08-29 11:00:00,2025-08-29 09:28:58,checkout,Combo 2,33482,B32353,15924,Phan Duy Khôi,male,[60997],15,Walk - In,20,SO - Walk-in,,,False,False,False,075088001539,,[],Walkin,73,2025-08-28 15:44:35,15924,,False,False,False,False,302,18.0,WORKATION,True,False,False,False,,
+43231,BL40880,2025-08-28,2025-08-29,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,1,0.0,,2,0,1099000.0,1099000.0,0.0,False,0.0,0.0,2025-08-28 07:00:00,2025-08-28 14:27:56,2025-08-29 01:15:06,2025-08-29 01:15:13,checkout,,33477,B32348,70245,Trần Quốc Trung,male,"[60989, 60990]",7,Facebook,16,SO - FIT,,,False,False,False,079091035079,,[],Facebook + IG,76,2025-08-28 14:07:12,70245,,False,False,False,False,303,,,False,False,False,False,,
+43230,BL40879,2025-08-28,2025-08-29,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,1,0.0,,2,0,1099000.0,1099000.0,0.0,Khách chưa cọc,0.0,1099000.0,2025-08-28 07:00:00,False,2025-08-29 05:00:00,False,cancel,False,33476,B32347,70245,Trần Quốc Trung,male,[60988],15,Walk - In,20,SO - Walk-in,,,False,False,False,079091035079,,[],Walkin,73,2025-08-28 14:05:39,70245,,False,False,False,2025-08-28 14:06:47,303,,,False,False,False,False,,
+43218,BL40867,2025-08-29,2025-08-29,11144,DLX (202),11039,DLX,DLX,Deluxe,759000.0,1,0.0,,2,0,759000.0,759000.0,0.0,False,0.0,0.0,2025-08-29 02:00:00,2025-08-29 04:21:31,2025-08-29 07:07:56,2025-08-29 07:08:01,checkout,"Phần còn lại khách thanh toán khi nhận phòng 
+ETA: 11-12h",33469,B32340,70237,Võ Tuấn Kiệt,male,"[60975, 61063]",15,Walk - In,20,SO - Walk-in,,,False,False,False,790109246794,,[],Walkin,73,2025-08-28 12:28:55,70237,,False,False,False,False,202,18.0,WORKATION,True,True,False,False,,
+43186,BL40835,2025-08-30,2025-09-01,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,899000.0,2,0.0,,2,0,1798000.0,1798000.0,0.0,False,0.0,0.0,2025-08-30 07:00:00,2025-08-30 08:56:28,2025-09-01 05:00:00,2025-09-01 05:09:04,checkout,"30/8: Combo 1
+31/8: 2 suối
+ Payment: ota_handle_payment
+Xuất hóa đơn vat
+Tên công ty: CÔNG TY TNHH OHMYHOTEL&CO VN
+Mã số thuế: 0314937097 Email: accounting.vn@ohmyhotel.com
+
+Địa chỉ: Khu F7-BCD, Tầng 7, Tòa nhà Mach, 127 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.Hồ Chí Minh
+
+",33448,B32319,57072,Nguyễn Hoàng Nhật Thảo,female,"[60923, 61314]",32,Ohmyhotel,18,SO - OTA,,,OTD2051756371745,V25082810077H01,OMHT,False,,[],Ohmyhotel,16,2025-08-28 09:02:27,70202,,False,False,False,False,303,9.0,OTA,False,False,False,False,,
+43132,BL40781,2025-08-29,2025-08-30,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,999000.0,1,0.0,,2,0,999000.0,1029000.0,0.0,False,0.0,0.0,2025-08-29 07:00:00,2025-08-29 06:58:00,2025-08-30 04:33:46,2025-08-30 04:33:52,checkout,"Cọc trước 50% - thanh toán phần còn lại khi nhận phòng - chỉ hỗ trợ lần đầu
+mượn 1 dao, 2 khay gia vị
+",33422,B32293,70112,Đỗ Kim Hiền,female,"[60856, 61102]",7,Facebook,16,SO - FIT,,,False,False,False,079196002748,,[],Facebook + IG,76,2025-08-28 06:33:38,70112,,False,False,False,False,303,,,False,False,False,False,,
+43102,BL40751,2025-08-28,2025-08-29,11133,STD (201),11037,STD,STD,Standard,793280.0,2,0.0,,2,0,793280.0,1292780.0,0.0,False,0.0,0.0,2025-08-28 07:00:00,2025-08-28 13:36:25,2025-08-29 09:00:00,2025-08-29 08:06:31,checkout,"ETA: 18H
+Khách LCO, đã báo phụ thu 50% 
+Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment",33398,B32269,32053,Lâm Ngọc Như,female,"[60807, 60820]",17,Agoda,18,SO - OTA,,,AG9E251756351466N3404,1929798556,AGO,False,,[],Agoda,4,2025-08-28 03:24:27,70059,,False,False,False,False,201,9.0,OTA,True,False,False,False,,
+43059,BL40708,2025-08-27,2025-08-28,11144,DLX (202),11039,DLX,DLX,Deluxe,859000.0,1,0.0,,1,0,859000.0,859000.0,0.0,False,0.0,0.0,2025-08-27 13:00:00,2025-08-27 12:58:07,2025-08-28 01:00:00,2025-08-27 17:15:33,checkout,False,33362,B32233,2028,Đoàn Phạm Minh Hoàng,male,[60726],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-27 12:22:14,2724,,False,False,False,False,202,19.0,DEADLINE - CATION,True,True,False,False,,
+43048,BL40697,2025-08-30,2025-09-01,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1380000.0,3,0.0,,2,0,2790000.0,3495000.0,0.0,False,0.0,0.0,2025-08-30 00:40:00,2025-08-30 00:40:22,2025-09-01 02:46:50,2025-09-01 02:46:53,checkout,"ETA : 5:30 (30 AUG)
+ECI: phụ thu 50%
+Khách mượn 203 2 gối
+ Payment: pay_at_hotel",33353,B32224,69962,JINGYANG MAK,male,"[60710, 61249]",18,Booking.com,18,SO - OTA,,,BO33241756288725N3201,6699119491,BDC,K5220775P,,[],Booking.com,5,2025-08-27 09:58:47,69962,,False,False,False,False,302,9.0,OTA,True,False,False,False,,
+42999,BL40648,2025-08-27,2025-08-28,11132,STD (101),11037,STD,STD,Standard,999000.0,1,0.0,,2,0,999000.0,999000.0,0.0,thay đổi lịch trình,0.0,999000.0,2025-08-27 07:00:00,False,2025-08-28 05:00:00,False,cancel,False,33313,B32184,67926,Phạm Thị My A,female,[60636],15,Walk - In,20,SO - Walk-in,,,False,False,False,ES578222,,[],Walkin,73,2025-08-27 05:22:49,67926,,False,False,False,2025-08-27 05:27:21,101,,,True,False,False,False,,
+42966,BL40615,2025-08-27,2025-08-28,11133,STD (201),11037,STD,STD,Standard,899000.0,1,0.0,,2,0,899000.0,899000.0,0.0,False,0.0,0.0,2025-08-27 07:00:00,2025-08-27 07:39:33,2025-08-28 05:00:00,2025-08-28 04:46:15,checkout,"Trang bị 2 ghế ngồi, mượn của 202 1 ghế cho 201",33299,B32170,30497,Lâm Đinh Anh Tuấn,male,"[60596, 60728]",29,zalo,16,SO - FIT,,,False,False,False,079093040061,,[],Zalo,74,2025-08-27 02:21:14,30497,,False,False,False,False,201,,,True,False,False,False,,
+42822,BL40471,2025-08-26,2025-08-26,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,959000.0,1,0.0,,1,0,959000.0,959000.0,0.0,False,0.0,0.0,2025-08-26 02:00:00,2025-08-26 01:57:42,2025-08-26 11:00:00,2025-08-26 10:19:17,checkout,,33193,B32064,68464,Mai Đặng Phúc ,male,[60384],15,Walk - In,20,SO - Walk-in,,,False,False,False,079083005501,,[],Walkin,73,2025-08-26 01:13:39,68464,,False,False,False,False,301,18.0,WORKATION,True,True,False,False,,
+42780,BL40429,2025-08-25,2025-08-26,11134,DLX (203),11039,DLX,DLX,Deluxe,1065970.0,1,0.0,,2,0,1065970.0,1065970.0,0.0,False,0.0,0.0,2025-08-25 07:00:00,2025-08-25 17:25:50,2025-08-26 02:49:19,2025-08-26 02:49:24,checkout,"Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment
+Khách check in khoảng 10-11h tối",33153,B32024,59554,NGUYEN TRAN PHUONG THAO,female,"[60316, 60348]",17,Agoda,18,SO - OTA,,,AG57B61756121999N3404,1643799874,AGO,False,,[],Agoda,4,2025-08-25 11:40:01,69612,,False,False,False,False,203,9.0,OTA,True,False,False,False,,
+42778,BL40427,2025-08-25,2025-08-26,11144,DLX (202),11039,DLX,DLX,Deluxe,859000.0,1,0.0,,2,0,859000.0,859000.0,0.0,Khách chưa cọc ,0.0,859000.0,2025-08-25 13:00:00,False,2025-08-26 01:00:00,False,cancel,Chờ khách chuyển khoản tiền phòng ,33151,B32022,67420,Trúc Nhi,female,[60313],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-25 11:05:49,67420,,False,False,False,2025-08-25 12:05:40,202,19.0,DEADLINE - CATION,True,True,False,False,,
+42759,BL40408,2025-08-25,2025-08-26,11132,STD (101),11037,STD,STD,Standard,999000.0,1,0.0,,2,0,999000.0,999000.0,0.0,False,0.0,0.0,2025-08-25 07:00:00,2025-08-25 08:10:30,2025-08-26 03:59:14,2025-08-26 03:59:19,checkout,False,33133,B32004,69565,Nguyễn Lâm Bình,male,"[60268, 60270]",15,Walk - In,20,SO - Walk-in,,,False,False,False,079086008634,,[],Walkin,73,2025-08-25 08:02:38,69565,,False,False,False,False,101,,,True,False,False,False,,
+42663,BL40312,2025-08-25,2025-08-26,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,842860.0,1,0.0,,2,0,842860.0,842860.0,0.0,False,0.0,0.0,2025-08-25 07:00:00,2025-08-25 10:52:14,2025-08-26 02:18:13,2025-08-26 02:18:22,checkout,"Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment",33077,B31948,35721,Nguyễn Nhật Khánh Duy,male,"[60145, 60344]",17,Agoda,18,SO - OTA,,,AG5BA817560840910N3404,1643617321,AGO,False,,[],Agoda,4,2025-08-25 01:08:13,69466,,False,False,False,False,303,9.0,OTA,False,False,False,False,,
+42624,BL40273,2025-08-25,2025-08-25,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,659000.0,1,0.0,,2,1,659000.0,659000.0,0.0,Khách đổi ý ,0.0,659000.0,2025-08-25 02:00:00,False,2025-08-25 11:00:00,False,cancel,Khách thanh toán bằng thẻ khi check in ,33041,B31912,61968,Hồ Minh Quân,male,[60093],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-24 11:58:33,69420,,False,False,False,2025-08-24 15:22:36,303,18.0,WORKATION,False,False,False,False,,
+42623,BL40272,2025-08-30,2025-09-03,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,1165500.0,5,0.0,,2,0,4672360.0,4672360.0,0.0,False,0.0,0.0,2025-08-30 07:00:00,2025-08-30 08:33:36,2025-09-03 10:00:00,False,allot,"30/8: Combo 1
+1/9: không fill
+2/9: 2 suối( inhouse )
+Khách late check out trước 17h00 ( chưa thanh toán )
+Limited Time Offer. Price includes 10% discount!
+ Payment: ota_handle_payment",33040,B31911,69394,LÊ THỤC LINH,female,"[60077, 61312]",17,Agoda,18,SO - OTA,,,AG7DD91756034692N3404,1643477200,AGO,070305004495,,[],Agoda,4,2025-08-24 11:24:54,69394,,False,False,False,False,301,9.0,OTA,True,True,False,False,,
+42601,BL40250,2025-08-27,2025-08-28,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,1,0.0,,2,0,1099000.0,1099000.0,0.0,False,0.0,0.0,2025-08-27 07:00:00,2025-08-27 13:55:03,2025-08-28 05:00:00,2025-08-28 05:09:09,checkout,24/8: Combo 1,33019,B31890,27706,Nguyễn Quốc Hưng,male,"[60040, 60042]",15,Walk - In,20,SO - Walk-in,,,False,False,False,079097022080,,[],Walkin,73,2025-08-24 08:27:48,27706,,False,False,False,False,303,,,False,False,False,False,,
+42550,BL40199,2025-08-23,2025-08-24,11144,DLX (202),11039,DLX,DLX,Deluxe,1199910.0,1,0.0,,2,0,1199910.0,1234910.0,0.0,False,0.0,0.0,2025-08-23 07:00:00,2025-08-23 16:14:16,2025-08-24 04:40:39,2025-08-24 04:40:44,checkout,"Last Minute Special. Price includes 11% discount!
+ Payment: ota_handle_payment",32974,B31845,59554,NGUYEN TRAN PHUONG THAO,female,"[59939, 59942]",17,Agoda,18,SO - OTA,,,AG63331755959873N3404,1928577208,AGO,False,,[],Agoda,4,2025-08-23 14:37:55,69271,,False,False,False,False,202,9.0,OTA,True,True,False,False,,
+42547,BL40196,2025-08-24,2025-08-25,11132,STD (101),11037,STD,STD,Standard,659000.0,1,0.0,,2,0,659000.0,659000.0,0.0,False,0.0,0.0,2025-08-24 13:00:00,2025-08-24 15:14:11,2025-08-25 01:00:00,2025-08-25 01:14:42,checkout,False,32971,B31842,59632,Nguyễn Yến Đình Đình,male,"[59933, 60029]",15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-23 14:14:36,69266,,False,False,False,False,101,19.0,DEADLINE - CATION,True,False,False,False,,
+42532,BL40181,2025-08-23,2025-08-24,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,899000.0,1,0.0,,1,0,899000.0,899000.0,0.0,False,0.0,0.0,2025-08-23 07:00:00,2025-08-23 11:53:10,2025-08-24 05:41:25,2025-08-24 05:41:32,checkout," Payment: ota_handle_payment
+xuất hóa đơn VAT
+Tên công ty: CÔNG TY TNHH OHMYHOTEL&CO VN
+Mã số thuế: 0314937097 Email: accounting.vn@ohmyhotel.com
+Địa chỉ: Khu F7-BCD, Tầng 7, Tòa nhà Mach, 127 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.Hồ Chí Minh",32958,B31829,42545,Đặng Lâm Anh Thư,female,[59905],32,Ohmyhotel,18,SO - OTA,,,OTEB831755944205,K25082311344H01,OMHT,False,,[],Ohmyhotel,16,2025-08-23 10:16:47,69239,,False,False,False,False,303,9.0,OTA,False,False,False,False,,
+42530,BL40179,2025-08-23,2025-08-24,11134,DLX (203),11039,DLX,DLX,Deluxe,1218475.0,1,0.0,,2,0,1218475.0,1218475.0,0.0,False,0.0,0.0,2025-08-23 07:00:00,2025-08-23 14:24:43,2025-08-24 04:07:44,2025-08-24 04:07:54,checkout,"
+ Payment: ota_handle_payment",32956,B31827,35994,SU CHIEN JUNG,male,"[59903, 59935]",46,Trip.Com,18,SO - OTA,,,TRC17B1755943434,1128141938951742,TRCO,False,,[],Trip.Com,63,2025-08-23 10:03:57,69237,,False,False,False,False,203,9.0,OTA,True,False,False,False,,
+42501,BL40150,2025-08-23,2025-08-24,11132,STD (101),11037,STD,STD,Standard,919080.0,1,0.0,,1,0,919080.0,919080.0,0.0,False,0.0,0.0,2025-08-23 07:00:00,2025-08-23 10:15:30,2025-08-24 03:27:40,2025-08-24 03:27:45,checkout,"Last Minute Special. Price includes 11% discount!
+ Payment: ota_handle_payment",32929,B31800,64763,Võ Ngọc Phương Vy ,female,[59841],17,Agoda,18,SO - OTA,,,AG9BC217559265790N3404,1643101772,AGO,False,,[],Agoda,4,2025-08-23 05:23:01,69170,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+42392,BL40041,2025-08-23,2025-08-24,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,1,0.0,,2,0,1099000.0,1099000.0,0.0,Khach không cọc tiền phòng ,0.0,1099000.0,2025-08-23 07:00:00,False,2025-08-24 05:00:00,False,cancel,Chờ khách cọc tiền phòng ,32864,B31735,69048,Gia Huy,male,[59686],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-22 11:29:10,69048,,False,False,False,2025-08-22 12:35:27,303,,,False,False,False,False,,
+42368,BL40017,2025-08-23,2025-08-24,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1225440.0,1,0.0,,2,0,1225440.0,1225440.0,0.0,False,0.0,0.0,2025-08-23 07:00:00,2025-08-23 11:17:38,2025-08-24 05:00:00,2025-08-24 05:05:04,checkout,"Time: 4h-4h30
+Last Minute Special. Price includes 11% discount!
+ Payment: ota_handle_payment",32842,B31713,57072,Nguyễn Hoàng Nhật Thảo,female,"[59632, 59789]",17,Agoda,18,SO - OTA,,,AGC68C1755850022N3404,1642856476,AGO,False,,[],Agoda,4,2025-08-22 08:07:03,68997,,False,False,False,False,302,9.0,OTA,True,False,False,False,,
+42305,BL39954,2025-08-22,2025-08-22,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,959000.0,1,0.0,,2,1,959000.0,959000.0,0.0,Khách không chuyển khoản,0.0,959000.0,2025-08-22 02:00:00,False,2025-08-22 11:00:00,False,cancel,"22/8: 2 suối, 2 cf",32798,B31669,68927,Khách,male,[59546],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-22 01:27:49,68927,,False,False,False,2025-08-22 03:24:23,301,18.0,WORKATION,True,True,False,False,,
+42183,BL39832,2025-08-22,2025-08-22,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,659000.0,1,0.0,,2,0,659000.0,659000.0,0.0,False,0.0,0.0,2025-08-22 02:00:00,2025-08-22 02:34:24,2025-08-22 10:49:00,2025-08-22 10:49:09,checkout,"22/8: 2 suối, 2 cf
+Mượn: 1 ghế P203, 1 dao",32696,B31567,27888,Nguyễn Thị Nam,female,"[59350, 59552]",15,Walk - In,20,SO - Walk-in,,,False,False,False, 030186008954,,[],Walkin,73,2025-08-21 03:29:48,27888,,False,False,False,False,303,18.0,WORKATION,False,False,False,False,,
+42171,BL39820,2025-08-21,2025-08-21,11131,K Kon (102),11042,K Kon,SDLX,Kin Inspired 3,959000.0,1,0.0,,3,0,959000.0,1159000.0,0.0,False,0.0,0.0,2025-08-21 02:00:00,2025-08-21 03:04:07,2025-08-21 07:02:58,2025-08-21 07:03:09,checkout,"POA
+GIữ phòng đến 10h - Khách đi ô tô",32685,B31556,68738,Nguyễn Thị Minh Tâm,female,"[59332, 59337, 59339]",29,zalo,16,SO - FIT,,,False,False,False,068196007713,,[],Zalo,74,2025-08-21 02:29:15,68738,,False,False,False,False,102,18.0,WORKATION,True,False,False,False,,
+42135,BL39784,2025-08-21,2025-08-22,11132,STD (101),11037,STD,STD,Standard,818070.0,1,0.0,,2,0,818070.0,818070.0,0.0,False,0.0,0.0,2025-08-21 07:00:00,2025-08-21 12:25:47,2025-08-22 03:08:11,2025-08-22 03:08:18,checkout,"Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment",32656,B31527,64763,Võ Ngọc Phương Vy ,female,"[59260, 59405]",17,Agoda,18,SO - OTA,,,AG112517557093140N3404,1927746885,AGO,False,,[],Agoda,4,2025-08-20 17:01:56,68673,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+42112,BL39761,2025-08-21,2025-09-01,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1599000.0,11,0.0,,1,0,17589000.0,17589000.0,0.0,False,0.0,0.0,2025-08-21 07:00:00,2025-08-21 05:00:26,2025-09-01 05:00:00,2025-09-01 05:07:30,checkout,"21/8: 2 suối( inhose )
+22/8: không fill
+23/8: không fill
+24/8: 2 suối( inhouse )
+25/8: 2 suối
+27/8: 2 suối( inhouse )
+28/8: không fill
+29/8: Combo 1, inhouse
+30/8: ko fill
+31/8: inhouse(fill 2 suối)
+Khách 103 extend thêm 11 đêm ",32636,B31507,65258,Phạm AARON Thai Hung,male,[59232],15,Walk - In,20,SO - Walk-in,,,False,False,False,567720007,,[],Walkin,73,2025-08-20 14:53:24,65258,,False,False,False,False,103,,,True,False,False,False,,
+42063,BL39712,2025-08-21,2025-08-21,11144,DLX (202),11039,DLX,DLX,Deluxe,759000.0,1,0.0,,2,0,759000.0,759000.0,0.0,False,0.0,0.0,2025-08-21 02:00:00,2025-08-21 04:05:24,2025-08-21 11:28:22,2025-08-21 11:29:05,checkout,"Hỗ trợ cọc do lần đầu, phần còn lại thanh toán khi nhận phòng
+ETA: 10h",32594,B31465,68576,Võ Thị Kiều Trang ,female,"[59145, 59362]",7,Facebook,16,SO - FIT,,,False,False,False,080198010732,,[],Facebook + IG,76,2025-08-20 09:08:01,68576,,False,False,False,False,202,18.0,WORKATION,True,True,False,False,,
+42041,BL39690,2025-08-21,2025-08-22,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1599000.0,1,0.0,,2,0,1599000.0,1599000.0,0.0,False,0.0,0.0,2025-08-21 07:00:00,2025-08-21 08:00:19,2025-08-22 05:00:00,2025-08-22 05:22:53,checkout,Dự kiến CI 14h00-15h00,32575,B31446,7879,Nguyễn Đình Quốc Tĩnh,male,"[59116, 59406]",15,Walk - In,20,SO - Walk-in,,,False,False,False,060092016926,,[],Walkin,73,2025-08-20 06:37:17,7879,,False,False,False,False,302,,,True,False,False,False,,
+41997,BL39646,2025-08-20,2025-08-20,11144,DLX (202),11039,DLX,DLX,Deluxe,759000.0,1,0.0,,2,0,759000.0,759000.0,0.0,False,0.0,0.0,2025-08-20 02:00:00,2025-08-20 02:20:46,2025-08-20 11:00:00,2025-08-20 10:31:16,checkout,False,32539,B31410,68464,Mai Đặng Phúc ,male,"[59061, 59127]",15,Walk - In,20,SO - Walk-in,,,False,False,False,079083005501,,[],Walkin,73,2025-08-20 02:14:12,68464,,False,False,False,False,202,18.0,WORKATION,True,True,False,False,,
+41995,BL39644,2025-08-20,2025-08-21,11134,DLX (203),11039,DLX,DLX,Deluxe,1109000.0,1,0.0,,1,0,1109000.0,1109000.0,0.0,False,0.0,0.0,2025-08-20 07:00:00,2025-08-20 09:49:50,2025-08-21 04:43:21,2025-08-21 04:43:29,checkout,"Payment: ota_handle_payment
+Xuất hóa đơn VAT
+Tên công ty: CÔNG TY TNHH OHMYHOTEL&CO VN
+Địa chỉ: Khu F7-BCD, Tầng 7, Toà nhà Mach, 127 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP.Hồ Chí Minh
+MST: 0314937097
+Email: accounting.vn@ohmyhotel.com",32537,B31408,68455,Phạm Trần Long,male,[59058],32,Ohmyhotel,18,SO - OTA,,,OT8A171755653645,V25082010042H01,OMHT,001076003036,,[],Ohmyhotel,16,2025-08-20 01:34:06,68455,,False,False,False,False,203,9.0,OTA,True,False,False,False,,
+41977,BL39626,2025-08-21,2025-08-22,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1599000.0,1,0.0,,2,0,1599000.0,1599000.0,0.0,Khách không chuyển khoản ,0.0,1599000.0,2025-08-21 07:00:00,False,2025-08-22 05:00:00,False,cancel,False,32520,B31391,7879,Nguyễn Đình Quốc Tĩnh,male,[59033],15,Walk - In,20,SO - Walk-in,,,False,False,False,060092016926,,[],Walkin,73,2025-08-19 19:42:59,7879,,False,False,False,2025-08-19 22:40:26,302,,,True,False,False,False,,
+41839,BL39488,2025-08-19,2025-08-20,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1128375.0,1,0.0,,1,0,1128375.0,1128375.0,0.0,False,0.0,0.0,2025-08-19 07:00:00,2025-08-19 14:42:15,2025-08-20 02:43:23,2025-08-20 02:43:28,checkout,"
+ Payment: ota_handle_payment",32409,B31280,68207,Lin XiuAng,male,[58841],46,Trip.Com,18,SO - OTA,,,TR67C31755566807,1128141740241929,TRCO,False,,[],Trip.Com,63,2025-08-19 01:26:49,68236,,False,False,False,False,302,9.0,OTA,True,False,False,False,,
+41838,BL39487,2025-08-19,2025-08-20,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,1128375.0,1,0.0,,1,0,1128375.0,1167375.0,0.0,False,0.0,0.0,2025-08-19 07:00:00,2025-08-19 14:42:12,2025-08-20 02:42:41,2025-08-20 02:42:49,checkout,"Khách 301, 302 cũ 
+ Payment: ota_handle_payment",32409,B31280,68070,Liu BingXian,male,[58840],46,Trip.Com,18,SO - OTA,,,TR67C31755566807,1128141740241929,TRCO,False,,[],Trip.Com,63,2025-08-19 01:26:49,68236,,False,False,False,False,301,9.0,OTA,True,True,False,False,,
+41837,BL39486,2025-08-19,2025-08-20,11131,K Kon (102),11042,K Kon,DLX,Kin Inspired 3,1078225.0,1,0.0,,2,0,1078225.0,1278225.0,0.0,False,0.0,0.0,2025-08-19 07:00:00,2025-08-19 14:42:26,2025-08-20 02:36:59,2025-08-20 02:37:05,checkout,"Khách 303 cũ 
+Khách đi 2 người muốn ở 2 giường đơn nên upgrade cho khách 
+ Payment: ota_handle_payment",32408,B31279,68069,Li Zhennan ,male,"[58839, 58995]",46,Trip.Com,18,SO - OTA,,,TRFFD81755566806,1128141740241928,TRCO,False,,[],Trip.Com,63,2025-08-19 01:26:48,68235,,False,False,False,False,102,9.0,OTA,True,False,False,False,,
+41836,BL39485,2025-08-19,2025-08-20,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,1,0.0,,2,1,1099000.0,1099000.0,0.0,Khách đặt trên app,0.0,1099000.0,2025-08-19 07:00:00,False,2025-08-20 05:00:00,False,cancel,False,32407,B31278,68233,Khách,male,[58837],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-19 01:14:45,68233,,False,False,False,2025-08-19 01:15:15,303,,,False,False,False,False,,
+41834,BL39483,2025-08-19,2025-08-20,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1599000.0,1,0.0,,2,1,1599000.0,1599000.0,0.0,Khách đặt trên app,0.0,1599000.0,2025-08-19 07:00:00,False,2025-08-20 05:00:00,False,cancel,False,32405,B31276,22708,TBD*,male,[58835],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-19 01:14:04,68231,,False,False,False,2025-08-19 01:15:41,302,,,True,False,False,False,,
+41833,BL39482,2025-08-19,2025-08-20,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,1599000.0,1,0.0,,2,1,1599000.0,1599000.0,0.0,Khách đặt trên app,0.0,1599000.0,2025-08-19 07:00:00,False,2025-08-20 05:00:00,False,cancel,False,32405,B31276,68231,Khách ,male,[58834],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-19 01:14:04,68231,,False,False,False,2025-08-19 01:15:28,301,,,True,True,False,False,,
+41712,BL39361,2025-08-27,2025-08-31,11131,K Kon (102),11042,K Kon,K Kon,Kin Inspired 3,1999000.0,4,0.0,,3,0,0.0,0.0,0.0,False,0.0,0.0,2025-08-27 07:00:00,2025-08-27 07:07:04,2025-08-31 05:00:00,2025-08-31 04:46:06,checkout,"27/8: 2 Combo 1
+28/8: không fill
+29/8: 1 mì, 1 snack, 4 suối (inhouse)
+30/8: fill 4 suối
+TỪ 28/8 SẼ CÓ THÊM 2 KHÁCH
+Nếu khách đến sớm thì cho khách check in bình thường
+Kols 
+Ms.Qiuyu approve",32314,B31185,68097,Nguyễn Ái Nhi,female,"[58666, 60814, 60815]",52,MKT,20,SO - Walk-in,,,False,False,False,049198009073,,[],False,False,2025-08-18 07:02:52,68097,,True,Mr Dennis,kols,False,102,,,True,False,False,False,,
+41694,BL39343,2025-08-19,2025-08-19,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1128375.0,1,0.0,,1,0,1128375.0,1128375.0,0.0,False,0.0,0.0,2025-08-18 18:00:00,2025-08-18 17:47:24,2025-08-19 02:12:29,2025-08-19 02:12:34,checkout,"
+ Payment: ota_handle_payment",32297,B31168,68207,Lin XiuAng,male,[58643],46,Trip.Com,18,SO - OTA,,,TR3BBA17554948930,1128141730432314,TRCO,EN6394781,,[],Trip.Com,63,2025-08-18 05:28:16,68070,,False,False,False,False,302,9.0,OTA,True,False,False,False,,
+41693,BL39342,2025-08-19,2025-08-19,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,1128375.0,1,0.0,,1,0,1128375.0,1128375.0,0.0,False,0.0,0.0,2025-08-18 18:00:00,2025-08-18 17:47:05,2025-08-19 02:08:09,2025-08-19 02:08:15,checkout,"
+ Payment: ota_handle_payment",32297,B31168,68070,Liu BingXian,male,[58642],46,Trip.Com,18,SO - OTA,,,TR3BBA17554948930,1128141730432314,TRCO,EN6394781,,[],Trip.Com,63,2025-08-18 05:28:16,68070,,False,False,False,False,301,9.0,OTA,True,True,False,False,,
+41692,BL39341,2025-08-19,2025-08-19,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,966875.0,1,0.0,,1,0,966875.0,966875.0,0.0,False,0.0,0.0,2025-08-18 18:00:00,2025-08-18 17:46:44,2025-08-19 02:05:18,2025-08-19 02:05:27,checkout,"
+ Payment: ota_handle_payment",32296,B31167,68069,Li Zhennan ,male,[58641],46,Trip.Com,18,SO - OTA,,,TRCA211755494894,1128141730432317,TRCO,EN5157650,,[],Trip.Com,63,2025-08-18 05:28:16,68069,,False,False,False,False,303,9.0,OTA,False,False,False,False,,
+41487,BL39136,2025-08-16,2025-08-17,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1799000.0,1,0.0,,1,1,1799000.0,1799000.0,0.0,False,0.0,0.0,2025-08-16 07:00:00,2025-08-16 10:54:47,2025-08-17 05:00:00,2025-08-17 03:55:37,checkout,Bạn của khách 101,32123,B30994,67776,Nguyễn Thị Vân,female,[58308],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-16 10:08:26,67777,,False,False,False,False,103,,,True,False,False,False,,
+41486,BL39135,2025-08-16,2025-08-17,11132,STD (101),11037,STD,STD,Standard,999000.0,1,0.0,,1,1,999000.0,999000.0,0.0,False,0.0,0.0,2025-08-16 07:00:00,2025-08-16 10:53:50,2025-08-17 05:00:00,2025-08-17 03:21:06,checkout,,32122,B30993,67788,Phạm Mai Hà Chung,female,[58319],15,Walk - In,20,SO - Walk-in,,,False,False,False,034192018010,,[],Walkin,73,2025-08-16 10:07:53,67776,,False,False,False,False,101,,,True,False,False,False,,
+41331,BL38980,2025-08-16,2025-08-18,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,2,0.0,,1,0,2198000.0,2198000.0,0.0,False,0.0,0.0,2025-08-16 07:00:00,2025-08-16 09:54:38,2025-08-18 05:00:00,2025-08-18 04:57:18,checkout,"Khách extend 1 đêm ngày 17/8
+17/08: fill quà - 2 suối, thay khăn",31997,B30868,42545,Đặng Lâm Anh Thư,female,[58030],15,Walk - In,20,SO - Walk-in,,,False,False,False,083190002015,,[],Walkin,73,2025-08-15 10:58:41,42545,,False,False,False,False,303,,,False,False,False,False,,
+41261,BL38910,2025-08-15,2025-08-16,11144,DLX (202),11039,DLX,SDLX,Deluxe,1299000.0,1,0.0,,2,0,1299000.0,1299000.0,0.0,False,0.0,0.0,2025-08-15 07:00:00,2025-08-15 09:30:12,2025-08-16 05:00:00,2025-08-16 05:02:47,checkout,ETA: 17h,31953,B30824,67427,Nguyễn Ngọc Tố Như ,female,"[57915, 57996]",29,zalo,16,SO - FIT,,,False,False,False,080193000209,,[],Zalo,74,2025-08-15 06:17:05,67427,,False,False,False,False,202,,,True,True,False,False,,
+41256,BL38905,2025-08-15,2025-08-16,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1159000.0,1,0.0,,2,0,1159000.0,1159000.0,0.0,False,0.0,0.0,2025-08-15 13:00:00,2025-08-15 13:51:40,2025-08-16 01:00:00,2025-08-16 00:55:40,checkout,"15/8: Combo 2 
+Deadline: 20h-8h",31948,B30819,50341,Ngô Huyền Trúc Nhi,female,"[57906, 58091]",15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-15 05:35:31,67420,,False,False,False,False,103,19.0,DEADLINE - CATION,True,False,False,False,,
+41253,BL38902,2025-08-18,2025-08-21,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1422798.0,3,0.0,,2,0,4268394.0,4268394.0,0.0,False,0.0,0.0,2025-08-18 07:00:00,2025-08-18 13:22:50,2025-08-21 04:59:30,2025-08-21 04:59:39,checkout,"18/8: Combo 1
+19/8: fill 2 suối
+20/8: 2 suối
+ETA :16:00-17:00
+Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment",31945,B30816,65258,Phạm AARON Thai Hung,male,"[57903, 58771]",17,Agoda,18,SO - OTA,,,AG7C761755235251N3404,899329458,AGO,False,,[],Agoda,4,2025-08-15 05:20:53,67417,,False,False,False,False,103,9.0,OTA,True,False,False,False,,
+41241,BL38890,2025-08-15,2025-08-16,11132,STD (101),11037,STD,STD,Standard,868020.0,1,0.0,,1,0,868020.0,868020.0,0.0,False,0.0,0.0,2025-08-15 07:00:00,2025-08-15 07:09:59,2025-08-16 05:00:00,2025-08-16 05:01:55,checkout,"15/8: Combo 1
+Last Minute Special. Price includes 11% discount!
+ Payment: ota_handle_payment",31934,B30805,67401,JIANLIANG BO,male,[57885],17,Agoda,18,SO - OTA,,,AGC7311755230589N3404,1640610924,AGO,E95084164,,[],Agoda,4,2025-08-15 04:03:11,67401,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+41240,BL38889,2025-08-15,2025-08-16,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,899000.0,1,0.0,,1,0,899000.0,899000.0,0.0,False,0.0,0.0,2025-08-15 07:00:00,2025-08-15 07:08:57,2025-08-16 05:00:00,2025-08-16 04:32:55,checkout,"15/8: Combo 1
+ Payment: ota_handle_payment
+Xuất hóa đơn VAT
+Tên công ty: CÔNG TY TNHH OHMYHOTEL&CO VN
+MST: 0314937097
+Email: accounting.vn@ohmyhotel.com
+địa chỉ:  Khu F7-BCD, Tầng 7, Tòa nhà Mach, 127 Ung Văn Khiêm, Phường Thạnh Mỹ Tây, TP. Hồ Chí Minh
+",31933,B30804,67399,HAODONG LAI,male,[57883],32,Ohmyhotel,18,SO - OTA,,,OT3A801755230149,V25081510044H01,OMHT,EE0836623,,[],Ohmyhotel,16,2025-08-15 03:55:50,67399,,False,False,False,False,303,9.0,OTA,False,False,False,False,,
+41158,BL38807,2025-08-16,2025-08-17,11134,DLX (203),11039,DLX,DLX,Deluxe,1499000.0,1,0.0,,2,0,1499000.0,1499000.0,0.0,False,0.0,0.0,2025-08-16 07:00:00,2025-08-16 06:51:11,2025-08-17 05:00:00,2025-08-17 03:22:45,checkout,16/8: Combo 1,31861,B30732,57452, Nguyễn Duy Tân,male,"[57751, 58241]",15,Walk - In,20,SO - Walk-in,,,False,False,False,07908401410,,[],Walkin,73,2025-08-14 12:19:28,57452,,False,False,False,False,203,,,True,False,False,False,,
+41129,BL38778,2025-08-20,2025-08-21,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,1,0.0,,2,0,549500.0,579500.0,0.0,False,0.0,0.0,2025-08-20 07:00:00,2025-08-20 07:00:11,2025-08-21 03:52:00,2025-08-21 03:52:07,checkout,"20/8: Combo 1
+Khách có voucher giảm giá 50% tiền phòng do sự cố House mất nước chuyển khách sang H81 ngày 26/6( C Nhã Approved ) ",31832,B30703,55301,Nguyễn Diệp Thái Oanh,male,"[57698, 59097]",15,Walk - In,20,SO - Walk-in,,,False,False,False,089198010234,,[],Walkin,73,2025-08-14 09:13:49,55301,,False,False,False,False,303,,,False,False,False,False,,
+41032,BL38681,2025-08-13,2025-08-14,11144,DLX (202),11039,DLX,DLX,Deluxe,1499000.0,1,0.0,,2,0,1499000.0,1534000.0,0.0,False,0.0,0.0,2025-08-13 07:00:00,2025-08-13 16:08:18,2025-08-14 01:01:21,2025-08-14 01:01:25,checkout,,31745,B30616,67106,Nguyễn Thị Cẩm Giang ,male,"[57545, 57551]",15,Walk - In,20,SO - Walk-in,,,False,False,False,089199000250,,[],Walkin,73,2025-08-13 15:47:16,67106,,False,False,False,False,202,,,True,True,False,False,,
+40921,BL38570,2025-08-20,2025-08-21,11132,STD (101),11037,STD,STD,Standard,769600.0,1,0.0,,2,0,769600.0,889600.0,0.0,False,0.0,0.0,2025-08-20 07:00:00,2025-08-20 07:48:37,2025-08-21 05:00:00,2025-08-21 05:15:08,checkout,"Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment",31658,B30529,32213,Nguyễn Thị Kim Chi,female,"[57375, 58997]",17,Agoda,18,SO - OTA,,,AGC3401755065848N3404,1640024303,AGO,False,,[],Agoda,4,2025-08-13 06:17:30,66961,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+40919,BL38568,2025-08-18,2025-08-19,11132,STD (101),11037,STD,STD,Standard,793280.0,1,0.0,,2,0,793280.0,828280.0,0.0,False,0.0,0.0,2025-08-18 07:00:00,2025-08-18 13:01:35,2025-08-19 01:39:54,2025-08-19 01:40:00,checkout,"18/8: Combo 1
+Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment",31656,B30527,32213,Nguyễn Thị Kim Chi,female,"[57372, 58765]",17,Agoda,18,SO - OTA,,,AG1CA51755065605N3404,1640023236,AGO,False,,[],Agoda,4,2025-08-13 06:13:27,66959,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+40905,BL38554,2025-08-16,2025-08-17,11131,K Kon (102),11042,K Kon,K Kon,Kin Inspired 3,1999000.0,1,0.0,,2,1,1999000.0,1999000.0,0.0,khách đổi ý,0.0,1999000.0,2025-08-16 07:00:00,False,2025-08-17 05:00:00,False,cancel,False,31643,B30514,66943,Mây,male,[57355],15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-13 04:34:05,66943,,False,False,False,2025-08-13 05:10:26,102,,,True,False,False,False,,
+40818,BL38467,2025-08-17,2025-08-27,11133,STD (201),11037,STD,STD,Standard,757760.0,10,0.0,,2,0,7888400.0,7888400.0,0.0,False,0.0,0.0,2025-08-17 07:00:00,2025-08-17 07:07:08,2025-08-27 05:00:00,2025-08-27 05:35:26,checkout,"17/8: Combo 1
+18/8: 2 suối, 2 mì
+19/8: 2 suối, 2 mì( inhouse )
+20/8: 2 suối 1 mì( thay khăn )
+21/8: 2 suối, 2 mì( inhouse )
+22/8: không fill
+23/8 inhouse 1 suối 1 cà phê
+24/8: 2 mì, 2 suối
+25/8: 2 mì, 2 suối, 2cf( inhouse )
+Khách Phương đặt dùm người nhà 
+ Price includes 14% discount!
+ Payment: ota_handle_payment",31568,B30439,59312,Võ Tây Phương,female,"[57232, 58471, 58551]",17,Agoda,18,SO - OTA,,,AG53F21755005187N3404,1639826408,AGO,False,,[],Agoda,4,2025-08-12 13:26:29,66825,,False,False,False,False,201,9.0,OTA,True,False,False,False,,
+40750,BL38399,2025-08-15,2025-08-17,11133,STD (201),11037,STD,STD,Standard,919080.0,2,0.0,,2,0,1787100.0,1826100.0,0.0,False,0.0,0.0,2025-08-15 07:00:00,2025-08-15 15:12:31,2025-08-17 05:00:00,2025-08-17 03:44:28,checkout,"15/8: Combo 1
+16/08: fill quà - 2 suối
+Khách check in lúc 22h
+Last Minute Special. Price includes 11% discount!
+ Payment: ota_handle_payment",31508,B30379,48872,Hồng Thị Phước,female,"[57131, 57681]",17,Agoda,18,SO - OTA,,,AGF24E17549876160N3404,1639734038,AGO,False,,[],Agoda,4,2025-08-12 08:33:38,66730,,False,False,False,False,201,9.0,OTA,True,False,False,False,,
+40693,BL38342,2025-08-13,2025-08-14,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1324800.0,1,0.0,,2,0,1324800.0,1339800.0,0.0,False,0.0,0.0,2025-08-13 07:00:00,2025-08-13 10:16:03,2025-08-14 05:00:00,2025-08-14 05:17:40,checkout,"
+ Payment: pay_at_hotel",31479,B30350,66690,Lê Nguyễn Nhật Trường,male,"[57067, 57441]",18,Booking.com,18,SO - OTA,,,BO8D5E1754980247N3201,5001152498,BDC,079204048427,,[],Booking.com,5,2025-08-12 06:30:48,66690,,False,False,False,False,302,9.0,OTA,True,False,False,False,,
+40685,BL38334,2025-08-14,2025-08-14,11133,STD (201),11037,STD,STD,Standard,559000.0,1,0.0,,1,2,559000.0,559000.0,0.0,False,0.0,0.0,2025-08-14 02:00:00,2025-08-14 05:08:26,2025-08-14 11:00:00,2025-08-14 10:49:31,checkout,14/8: Combo 2,31473,B30344,1119,Võ Duy Chiêu Anh,female,[57057],15,Walk - In,20,SO - Walk-in,,,False,False,False,079195021498,,[],Walkin,73,2025-08-12 06:12:13,1119,,False,False,False,False,201,18.0,WORKATION,True,False,False,False,,
+40450,BL38099,2025-08-10,2025-08-11,11132,STD (101),11037,STD,STD,Standard,920700.0,1,0.0,,2,0,920700.0,920700.0,0.0,False,0.0,0.0,2025-08-10 07:00:00,2025-08-10 17:05:34,2025-08-11 03:15:56,2025-08-11 03:16:05,checkout,"
+ Payment: pay_at_hotel",31278,B30149,59554,NGUYEN TRAN PHUONG THAO,female,"[56702, 56703]",18,Booking.com,18,SO - OTA,,,BOB1FE1754843567N3201,5140584388,BDC,False,,[],Booking.com,5,2025-08-10 16:32:49,66372,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+40443,BL38092,2025-08-10,2025-08-11,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1599000.0,1,0.0,,2,0,1599000.0,1599000.0,0.0,False,0.0,0.0,2025-08-10 07:00:00,2025-08-10 15:09:03,2025-08-10 23:49:20,2025-08-10 23:49:26,checkout,Combo 1,31271,B30142,66361,Trương Dĩ Hảo ,male,"[56687, 56691]",15,Walk - In,20,SO - Walk-in,,,False,False,False,079085030920,,[],Walkin,73,2025-08-10 15:03:19,66361,,False,False,False,False,302,,,True,False,False,False,,
+40434,BL38083,2025-08-10,2025-08-11,11133,STD (201),11037,STD,STD,Standard,659000.0,1,0.0,,1,0,659000.0,659000.0,0.0,False,0.0,0.0,2025-08-10 13:00:00,2025-08-10 15:40:15,2025-08-10 23:12:19,2025-08-10 23:12:26,checkout,Deadline:Cb2,31265,B30136,63102,Nguyễn Phước Vinh,male,[56678],15,Walk - In,20,SO - Walk-in,,,False,False,False,079202011883,,[],Walkin,73,2025-08-10 14:33:37,63102,,False,False,False,False,201,19.0,DEADLINE - CATION,True,False,False,False,,
+40408,BL38057,2025-08-11,2025-08-13,11131,K Kon (102),11042,K Kon,K Kon,Kin Inspired 3,1699000.0,2,0.0,,2,0,3398000.0,3398000.0,0.0,False,0.0,0.0,2025-08-11 07:00:00,2025-08-11 22:29:13,2025-08-13 05:00:00,2025-08-13 02:46:16,checkout,"Khách ở 2 người
+Khách check in sau 23h ",31244,B30115,60773,Nguyễn Ngọc Kim Khang,female,"[56646, 57003]",15,Walk - In,20,SO - Walk-in,,,False,False,False,035196008020,,[],Walkin,73,2025-08-10 11:58:28,59698,,False,False,False,False,102,,,True,False,False,False,,
+40327,BL37976,2025-08-09,2025-08-10,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1599000.0,2,0.0,,1,0,1599000.0,2113700.0,0.0,False,0.0,0.0,2025-08-09 07:00:00,2025-08-09 20:37:59,2025-08-10 07:00:00,2025-08-10 07:44:04,checkout,"9/8: Combo 1
+Khách check in 5h sáng, mai 10/8 khách có thể late check out hoặc book thêm 1 ngày ",31170,B30041,24432,Lê Văn Chí Huy,male,[56496],15,Walk - In,20,SO - Walk-in,,,False,False,False,079099011180,,[],Walkin,73,2025-08-09 16:10:36,24432,,False,False,False,False,302,,,True,False,False,False,,
+40322,BL37971,2025-08-10,2025-08-12,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,2,0.0,,2,0,2198000.0,2233000.0,0.0,False,0.0,0.0,2025-08-10 07:00:00,2025-08-10 06:17:02,2025-08-12 02:26:44,2025-08-12 02:27:00,checkout,"10/8: Combo 1, CI 14h
+11/8: 2 suối
+Khách mượn 1 ghế 301",31165,B30036,23681,Nguyễn Phú Minh,male,"[56486, 56487]",15,Walk - In,20,SO - Walk-in,,,False,False,False,001095019577,,[],Walkin,73,2025-08-09 15:45:32,23681,,False,False,False,False,303,,,False,False,False,False,,
+40315,BL37964,2025-08-10,2025-08-11,11131,K Kon (102),11042,K Kon,K Kon,Kin Inspired 3,1437820.0,1,0.0,,2,2,1437820.0,1476820.0,0.0,False,0.0,0.0,2025-08-10 07:00:00,2025-08-10 07:09:56,2025-08-10 23:29:09,2025-08-10 23:29:14,checkout,"Pt ng thứ 3 giá 189,000 /ng/đêm
+Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment",31158,B30029,66172,Nguyễn Việt Hùng,male,"[56473, 56590, 56591, 56592]",17,Agoda,18,SO - OTA,,,AGC52E1754748961N3404,1638904475,AGO,079085008952,,[],Agoda,4,2025-08-09 14:16:03,66172,,False,False,False,False,102,9.0,OTA,True,False,False,False,,
+40196,BL37845,2025-08-09,2025-08-10,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1599000.0,1,0.0,,2,0,1599000.0,1599000.0,0.0,Dời khách sang Tân Phong do sự cố máy lạnh,0.0,1599000.0,2025-08-09 07:00:00,False,2025-08-10 05:00:00,False,cancel,"Do máy lạnh 302 bị lỗi tự tắt, NCC đang bảo trì, chưa tìm ra nguyên nhân, không khắc phục kịp trước 14h.  Move khách sang 201-H75 , khách đồng ý. 
+Book xe cho khách sang 75 (Kin chịu phí xe) - 46,000đ ( Nhã book Be) 
+MÃ S bên 75 là S42733",31057,B29928,58503,Huỳnh Thị Ngọc Chi,male,"[56239, 56251]",15,Walk - In,20,SO - Walk-in,,,False,False,False,091199013045,,[],Walkin,73,2025-08-08 16:06:48,58503,,False,False,False,2025-08-09 11:04:34,302,,,True,False,False,False,,
+40184,BL37833,2025-08-09,2025-08-10,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,1123320.0,1,0.0,,2,0,1123320.0,1123320.0,0.0,False,0.0,0.0,2025-08-09 07:00:00,2025-08-09 14:14:59,2025-08-10 05:00:00,2025-08-10 02:12:47,checkout,"Dự kiến CI sau 20g00
+Last Minute Special. Price includes 11% discount!
+ Payment: ota_handle_payment",31045,B29916,65945,LONGWEI LI,male,"[56220, 56472]",17,Agoda,18,SO - OTA,,,AG2A051754662967N3404,1638613532,AGO,E87692191,,[],Agoda,4,2025-08-08 14:22:49,65945,,False,False,False,False,301,9.0,OTA,True,True,False,False,,
+40173,BL37822,2025-08-09,2025-08-10,11133,STD (201),11037,STD,STD,Standard,976500.0,1,0.0,,2,0,976500.0,976500.0,0.0,False,0.0,0.0,2025-08-09 07:00:00,2025-08-09 06:40:31,2025-08-10 05:00:00,2025-08-10 04:06:51,checkout,"
+ Payment: pay_at_hotel",31035,B29906,38165,Lương Tịnh Nguyên,male,"[56176, 56335]",18,Booking.com,18,SO - OTA,,,BOB8E21754653696N3201,6067303928,BDC,False,,[],Booking.com,5,2025-08-08 11:48:17,65889,,False,False,False,False,201,9.0,OTA,True,False,False,False,,
+40127,BL37776,2025-08-08,2025-08-11,11144,DLX (202),11039,DLX,DLX,Deluxe,1199520.0,3,0.0,,2,0,3598560.0,3598560.0,0.0,False,0.0,0.0,2025-08-08 07:00:00,2025-08-08 11:16:50,2025-08-11 03:55:12,2025-08-11 03:55:19,checkout,"08/09: Combo 1
+09/08: 2 suối - thay khăn
+10/8: inhouse, 1 mì 2 suối
+ Payment: pay_at_hotel",30994,B29865,45775,Cao Huỳnh Thiện,male,"[56084, 56171]",18,Booking.com,18,SO - OTA,,,BO583A175463572801N3201,5265501201,BDC,False,,[],Booking.com,5,2025-08-08 06:48:50,65800,,False,False,False,False,202,9.0,OTA,True,True,False,False,,
+40125,BL37774,2025-08-09,2025-08-10,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1633700.0,1,0.0,,2,0,1633700.0,1848700.0,0.0,False,0.0,0.0,2025-08-09 07:00:00,2025-08-09 07:39:35,2025-08-10 05:00:00,2025-08-10 02:32:57,checkout,"
+ Payment: ota_handle_payment",30992,B29863,65798,Nguyễn Thị Kim Thủy,female,"[56082, 56346]",46,Trip.Com,18,SO - OTA,,,TRB3021754635604,1669100503558742,TRCO,089193000287,,[],Trip.Com,63,2025-08-08 06:46:46,65798,,False,False,False,False,103,9.0,OTA,True,False,False,False,,
+40110,BL37759,2025-08-08,2025-08-09,11137,SDLX (302),11040,SDLX,SDLX,Super Deluxe,1096500.0,1,0.0,,2,0,1096500.0,1096500.0,0.0,False,0.0,0.0,2025-08-08 07:00:00,2025-08-08 15:01:27,2025-08-09 05:00:00,2025-08-09 02:07:25,checkout,"8/8: Combo 1
+Khách check in 23h00
+ Payment: ota_handle_payment",30981,B29852,65779,Nguyễn Vũ Hải Đăng ,male,"[56054, 56225]",46,Trip.Com,18,SO - OTA,,,TRCCF81754628606,1669100503358019,TRCO,079099005666,,[],Trip.Com,63,2025-08-08 04:50:08,65779,,False,False,False,False,302,9.0,OTA,True,False,False,False,,
+40105,BL37754,2025-08-08,2025-08-12,11134,DLX (203),11039,DLX,DLX,Deluxe,1062925.0,4,0.0,,2,0,4329475.0,4329475.0,0.0,False,0.0,0.0,2025-08-08 07:00:00,2025-08-08 06:59:26,2025-08-12 05:00:00,2025-08-12 04:57:32,checkout,"8/8: Combo 1
+09/08: inhouse fill 2 suối , 2 cà phê
+10/8: fill 2 suối
+11/8: inhouse, fill 2 suối
+ Payment: ota_handle_payment",30976,B29847,65794,Lư Văn Thanh,male,"[56079, 56086]",46,Trip.Com,18,SO - OTA,,,TR81D11754626900,1128141492942182,TRCO,False,,[],Trip.Com,63,2025-08-08 04:21:41,65769,,False,False,False,False,203,9.0,OTA,True,False,False,False,,
+40061,BL37710,2025-08-08,2025-08-09,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,1238400.0,1,0.0,,2,0,1238400.0,1238400.0,0.0,False,0.0,0.0,2025-08-08 07:00:00,2025-08-08 07:39:42,2025-08-09 05:00:00,2025-08-09 01:42:40,checkout,"8/8: Combo 1
+ Payment: pay_at_hotel",30953,B29824,65744,Thái Huy Trọng,male,"[55999, 56096]",18,Booking.com,18,SO - OTA,,,BO0F601754619566N3201,5866831185,BDC,089085031500,,[],Booking.com,5,2025-08-08 02:19:28,65744,,False,False,False,False,301,9.0,OTA,True,True,False,False,,
+40053,BL37702,2025-08-08,2025-08-09,11132,STD (101),11037,STD,STD,Standard,842490.0,1,0.0,,2,1,842490.0,842490.0,0.0,False,0.0,0.0,2025-08-08 07:00:00,2025-08-08 11:46:31,2025-08-09 05:00:00,2025-08-09 01:46:50,checkout,"8/8: Combo 1
+ETA : 17H-18H
+2 người lớn 1 em bé 11t
+Last Minute Special. Price includes 11% discount!
+ Payment: ota_handle_payment",30946,B29817,65734,Châu Thị Hồng Nhung ,male,"[55986, 56182]",17,Agoda,18,SO - OTA,,,AG986E1754613290N3404,1638357591,AGO,091186014113,,[],Agoda,4,2025-08-08 00:34:51,65734,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+39962,BL37611,2025-08-08,2025-08-09,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1799000.0,1,0.0,,2,0,1799000.0,1799000.0,0.0,False,0.0,0.0,2025-08-08 07:00:00,2025-08-08 06:37:11,2025-08-09 05:00:00,2025-08-09 05:45:46,checkout,"05/08: Combo 1
+06/08: 2 suối
+07/08: 2 suối
+08/08: Combo 1
+Khách thanh toán tại quầy, booking nối S42167",30864,B29735,58503,Huỳnh Thị Ngọc Chi,male,"[55821, 55956]",15,Walk - In,20,SO - Walk-in,,,False,False,False,False,,[],Walkin,73,2025-08-07 07:39:37,65579,,False,False,False,False,103,,,True,False,False,False,,
+39901,BL37550,2025-08-07,2025-08-08,11134,DLX (203),11039,DLX,DLX,Deluxe,1209600.0,1,0.0,,1,0,1209600.0,1659300.0,0.0,False,0.0,0.0,2025-08-07 07:00:00,2025-08-07 09:48:02,2025-08-08 05:00:00,2025-08-08 05:06:06,checkout,"Khách có nhu cầu in sớm, đã báo phụ thu
+mã hoàn tiền dư : TOWNP00431
+ Payment: pay_at_hotel",30815,B29686,65490,JinTao Zhao ,male,[55727],18,Booking.com,18,SO - OTA,,,BO8F851754532830N3201,6949792978,BDC,EF2687523,,[],Booking.com,5,2025-08-07 02:13:52,65490,,False,False,False,False,203,9.0,OTA,True,False,False,False,,
+39899,BL37548,2025-08-07,2025-08-08,False,False,11037,STD,STD,Standard,920700.0,1,0.0,,2,0,920700.0,920700.0,0.0,Khách đã đặt phòng 203 ,0.0,920700.0,2025-08-07 07:00:00,False,2025-08-08 05:00:00,False,cancel,"
+ Payment: pay_at_hotel",30813,B29684,65486,Zhao tao,male,[55723],18,Booking.com,18,SO - OTA,,,BO2D1F1754532473N3201,6792019218,BDC,False,,[],Booking.com,5,2025-08-07 02:07:58,65486,,False,False,False,2025-08-07 02:25:11,,9.0,OTA,,,False,False,,
+39872,BL37521,2025-08-07,2025-08-09,11133,STD (201),11037,STD,STD,Standard,999000.0,2,0.0,,2,0,1998000.0,2033000.0,0.0,False,0.0,0.0,2025-08-07 07:00:00,2025-08-07 07:06:13,2025-08-09 05:00:00,2025-08-09 01:57:37,checkout,"7/8: Combo 1
+8/8: không fill",30789,B29660,23681,Nguyễn Phú Minh,male,"[55673, 55675]",15,Walk - In,20,SO - Walk-in,,,False,False,False,001095019577,,[],Walkin,73,2025-08-06 17:13:46,23681,,False,False,False,False,201,,,True,False,False,False,,
+39850,BL37499,2025-08-06,2025-08-07,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1145375.0,1,0.0,,2,0,1145375.0,1145375.0,0.0,False,0.0,0.0,2025-08-06 07:00:00,2025-08-06 14:57:38,2025-08-07 05:00:00,2025-08-07 04:56:03,checkout,"
+ Payment: pay_at_hotel",30770,B29641,59554,NGUYEN TRAN PHUONG THAO,female,"[55637, 55642]",18,Booking.com,18,SO - OTA,,,BOE7531754491093N3201,6930685214,BDC,False,,[],Booking.com,5,2025-08-06 14:38:14,65412,,False,False,False,False,303,9.0,OTA,False,False,False,False,,
+39830,BL37479,2025-08-06,2025-08-07,11133,STD (201),11037,STD,STD,Standard,999000.0,1,0.0,,1,0,999000.0,999000.0,0.0,False,0.0,0.0,2025-08-06 07:00:00,2025-08-06 11:43:06,2025-08-07 03:20:12,2025-08-07 03:20:16,checkout,"*KHÁCH NGỌC NHI ĐẶT GIÙM - CHỈ CÒN LẠI MINH TRỌNG Ở 
+Combo 1 ",30750,B29621,65381, Nguyễn Ngọc Nhi ,male,"[55604, 55606]",29,zalo,16,SO - FIT,,,False,False,False,False,,[],Zalo,74,2025-08-06 11:20:55,65381,,False,False,False,False,201,,,True,False,False,False,,
+39763,BL37412,2025-08-09,2025-08-10,11132,STD (101),11037,STD,STD,Standard,999000.0,1,0.0,,2,0,999000.0,999000.0,0.0,False,0.0,0.0,2025-08-09 07:00:00,2025-08-09 06:26:09,2025-08-10 05:00:00,2025-08-10 00:00:04,checkout,Nếu có phòng hỗ trợ khách in sớm ,30698,B29569,32053,Lâm Ngọc Như,female,"[55513, 56323]",15,Walk - In,20,SO - Walk-in,,,False,False,False, 079305002602,,[],Walkin,73,2025-08-06 04:50:24,32053,,False,False,False,False,101,,,True,False,False,False,,
+39673,BL37322,2025-08-08,2025-08-09,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1599000.0,1,0.0,,2,0,1599000.0,1599000.0,0.0,huy,0.0,1599000.0,2025-08-08 07:00:00,False,2025-08-09 05:00:00,False,cancel,giữ phòng đến 09h ngày 6,30627,B29498,65193,Hiền,male,[55376],29,zalo,16,SO - FIT,,,False,False,False,False,,[],Zalo,74,2025-08-05 10:23:05,65193,,False,False,False,2025-08-06 02:22:13,103,,,True,False,False,False,,
+39416,BL37065,2025-08-07,2025-08-10,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,1099000.0,3,0.0,,1,0,3297000.0,3332000.0,0.0,False,0.0,0.0,2025-08-07 07:00:00,2025-08-07 07:51:05,2025-08-10 05:00:00,2025-08-10 01:38:45,checkout,"7/8: Combo 1
+8/8: 2 suối
+09/08: inhouse - chờ khách phản hồi
+Phần còn lại khách toán khi nhận phòng ",30414,B29285,64861,Lý Hiển Long,male,[55014],15,Walk - In,20,SO - Walk-in,,,False,False,False,001200004273,,[],Walkin,73,2025-08-04 06:30:46,64861,,False,False,False,False,303,,,False,False,False,False,,
+39327,BL36976,2025-08-04,2025-08-05,11133,STD (201),11037,STD,STD,Standard,892800.0,1,0.0,,2,0,892800.0,907800.0,0.0,False,0.0,0.0,2025-08-04 07:00:00,2025-08-04 07:21:59,2025-08-05 05:00:00,2025-08-05 04:59:26,checkout,"
+ Payment: pay_at_hotel",30339,B29210,64763,Võ Ngọc Phương Vy ,female,"[54895, 55088]",18,Booking.com,18,SO - OTA,,,BO57481754228999N3201,5794883604,BDC,079198000338,,[],Booking.com,5,2025-08-03 13:50:01,64763,,False,False,False,False,201,9.0,OTA,True,False,False,False,,
+39155,BL36804,2025-08-09,2025-08-10,11131,K Kon (102),11042,K Kon,K Kon,Kin Inspired 3,1702800.0,1,0.0,,2,2,1702800.0,1702800.0,0.0,False,0.0,0.0,2025-08-09 07:00:00,2025-08-09 11:48:03,2025-08-10 05:00:00,2025-08-10 03:39:09,checkout,"Người thứ 3 pt 189k/ng/đêm
+Giữ cho khách slot đậu ô tô 
+Khách giữ 2 thẻ phòng 
+ Payment: pay_at_hotel",30196,B29067,64446,Nguyễn Hồng Hà ,male,"[54563, 56430]",18,Booking.com,18,SO - OTA,,,BO87AE1754116148N3201,5898187330,BDC,089083016409,,[],Booking.com,5,2025-08-02 06:29:10,64446,,False,False,False,False,102,9.0,OTA,True,False,False,False,,
+39058,BL36707,2025-08-01,2025-08-02,11132,STD (101),11037,STD,STD,Standard,986070.0,1,0.0,,2,0,986070.0,1051070.0,0.0,False,0.0,0.0,2025-08-01 07:00:00,2025-08-01 12:51:10,2025-08-02 05:00:00,2025-08-02 05:21:37,checkout,"1/8: Combo 1
+ Payment: pay_at_hotel",30121,B28992,59554,NGUYEN TRAN PHUONG THAO,female,"[54402, 54404]",18,Booking.com,18,SO - OTA,,,BO59001754049544N3201,6645696142,BDC,False,,[],Booking.com,5,2025-08-01 11:59:06,64315,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+38955,BL36604,2025-08-02,2025-08-03,11132,STD (101),11037,STD,STD,Standard,999000.0,1,0.0,,2,0,999000.0,999000.0,0.0,False,0.0,0.0,2025-08-02 07:00:00,2025-08-02 08:07:08,2025-08-03 05:00:00,2025-08-03 04:29:59,checkout,2/8: Combo 1,30037,B28908,43239, Ngô Kiều Hạnh,female,"[54233, 54332]",29,zalo,16,SO - FIT,,,False,False,False,False,,[],Zalo,74,2025-08-01 02:29:47,64152,,False,False,False,False,101,,,True,False,False,False,,
+38887,BL36536,2025-08-01,2025-08-01,11132,STD (101),11037,STD,STD,Standard,559000.0,1,0.0,,2,0,559000.0,559000.0,0.0,False,0.0,0.0,2025-08-01 01:00:00,2025-08-01 00:54:44,2025-08-01 10:00:00,2025-08-01 09:49:12,checkout,"work (8-17), cb2
+Khách mượn 1 ghế ở quầy lễ tân",29979,B28850,30742,Nguyễn Xuân Mai,female,"[54129, 54200]",7,Facebook,16,SO - FIT,,,False,False,False,034304000108,,[],Facebook + IG,76,2025-07-31 15:12:01,30742,,False,False,False,False,101,18.0,WORKATION,True,False,False,False,,
+38885,BL36534,2025-08-01,2025-08-01,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1059000.0,1,0.0,,2,0,1059000.0,1376000.0,0.0,False,0.0,0.0,2025-08-01 02:00:00,2025-08-01 05:58:22,2025-08-01 14:00:00,2025-08-01 14:27:52,checkout,"Combo 2
+Khách muốn LCO 21g00 - chưa thanh toán",29977,B28848,64051,Võ Thị Ngọc Quỳnh,female,"[54121, 54292]",15,Walk - In,20,SO - Walk-in,,,False,False,False,068199000847,,[],Walkin,73,2025-07-31 14:48:07,64051,,False,False,False,False,103,18.0,WORKATION,True,False,False,False,,
+38829,BL36478,2025-08-02,2025-08-04,11130,SSUT (103),11041,SSUT,STD,Kin Inspired 2,940695.0,2,0.0,,2,0,1992060.0,2792060.0,0.0,False,0.0,0.0,2025-08-02 07:00:00,2025-08-02 08:25:25,2025-08-04 05:00:00,2025-08-04 05:11:28,checkout,"2/8: Combo 1
+3/8: 2 suối
+ Payment: pay_at_hotel",29933,B28804,63961,Nguyễn Quang Thành ,male,"[54020, 54775]",18,Booking.com,18,SO - OTA,,,BOBC351753949164N3201,5197670618,BDC,C7976822,,[],Booking.com,5,2025-07-31 08:06:06,63961,,False,False,False,False,103,9.0,OTA,True,False,False,False,,
+38795,BL36444,2025-08-01,2025-08-01,11133,STD (201),11037,STD,STD,Standard,559000.0,1,0.0,,2,0,559000.0,559000.0,0.0,False,0.0,0.0,2025-08-01 02:00:00,2025-08-01 02:31:10,2025-08-01 11:00:00,2025-08-01 10:53:01,checkout,Combo 2,29904,B28775,27888,Nguyễn Thị Nam,female,"[53977, 54224]",15,Walk - In,20,SO - Walk-in,,,False,False,False, 030186008954,,[],Walkin,73,2025-07-31 04:21:26,27888,,False,False,False,False,201,18.0,WORKATION,True,False,False,False,,
+38644,BL36293,2025-08-03,2025-08-07,11132,STD (101),11037,STD,STD,Standard,769600.0,4,0.0,,1,0,3126500.0,3126500.0,0.0,False,0.0,0.0,2025-08-03 07:00:00,2025-08-03 07:00:27,2025-08-06 23:58:16,2025-08-06 23:58:23,checkout,"3/8: combo 1
+4/8: 2 suối
+05/08: inhouse - 2 suối, 1 snack
+6/8: 2 suối, 1 snack
+Bk nối của S40133
+Limited Time Offer. Price includes 13% discount!
+ Payment: ota_handle_payment",29783,B28654,61826,ZHENHUA XING,male,[53758],17,Agoda,18,SO - OTA,,,AG66471753867805N3404,1635554050,AGO,False,,[],Agoda,4,2025-07-30 09:30:07,63671,,False,False,False,False,101,9.0,OTA,True,False,False,False,,
+38398,BL36047,2025-08-02,2025-08-03,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1799000.0,1,0.0,,1,0,1799000.0,1799000.0,0.0,False,0.0,0.0,2025-08-02 07:00:00,2025-08-02 07:09:49,2025-08-03 05:00:00,2025-08-03 05:11:57,checkout,"2/8: Combo 1
+Đã nhận được hàng khách gửi
+Hỗ trợ khách đổi ngày 1 lần ",29580,B28451,63172,Nguyễn Lan Hương,male,[53410],7,Facebook,16,SO - FIT,,,False,False,False,002300005824,,[],Facebook + IG,76,2025-07-28 21:19:49,63172,,False,False,False,False,103,,,True,False,False,False,,
+38196,BL35845,2025-08-01,2025-08-04,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1799000.0,4,0.0,,2,1,5397000.0,5397000.0,0.0,Hủy phòng,0.0,5397000.0,2025-08-01 05:00:00,False,2025-08-04 07:00:00,False,cancel,block tạm,29399,B28270,62824,block tạm,male,[53078],3,Direct,16,SO - FIT,,,False,False,False,False,,[],False,False,2025-07-27 07:43:54,62824,,False,False,False,2025-07-27 08:19:45,103,,,True,False,False,False,,
+37793,BL35442,2025-08-01,2025-08-03,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,1399000.0,2,0.0,,1,0,2658000.0,2658000.0,0.0,False,0.0,0.0,2025-08-01 07:00:00,2025-08-01 13:38:21,2025-08-03 05:00:00,2025-08-03 04:41:00,checkout,"1/8: Combo 1
+2/8: 2 suối
+KHÔNG SHOW GIÁ
+KHÔNG XUẤT HÓA ĐƠN",29055,B27926,62115,Wu Ren Da,male,[52335],11,Zalo,19,SO - TA,,,False,False,False,075199010917,,[],"Long An Tours CO.,LTD",711,2025-07-24 09:02:44,62111,,False,False,False,False,301,,,True,True,False,False,,
+37792,BL35441,2025-08-01,2025-08-03,11127,S.STD (303),11038,S.STD,S.STD,Super Standard,999000.0,2,0.0,,1,0,1898000.0,1898000.0,0.0,False,0.0,0.0,2025-08-01 07:00:00,2025-08-01 13:38:24,2025-08-03 01:31:25,2025-08-03 01:31:38,checkout,"1/8: Combo 1
+2/8: 2 suối
+KHÔNG SHOW GIÁ
+KHÔNG XUẤT HÓA ĐƠN",29055,B27926,62111,Đường Yến Nhi,male,[52334],11,Zalo,19,SO - TA,,,False,False,False,075199010917,,[],"Long An Tours CO.,LTD",711,2025-07-24 09:02:44,62111,,False,False,False,False,303,,,False,False,False,False,,
+37531,BL35180,2025-08-29,2025-09-02,11136,SDLX (301),11040,SDLX,SDLX,Super Deluxe,947940.0,4,0.0,,2,0,3724050.0,3724050.0,0.0,Booking canceled from OTA,0.0,3724050.0,2025-08-29 07:00:00,False,2025-09-02 05:00:00,False,cancel,"ETA : 17:00-18:00
+Early Booking Saver. Price includes 17% discount!
+ Payment: ota_handle_payment",28825,B27696,61725,Alicia Limah Anak Daut,male,[51915],17,Agoda,18,SO - OTA,,,AG6C2C1753195482N3404,1919581288,AGO,False,,[],Agoda,4,2025-07-22 14:44:44,61725,,False,False,False,2025-08-04 03:30:24,301,9.0,OTA,True,True,False,False,,
+37515,BL35164,2025-08-01,2025-08-03,11144,DLX (202),11039,DLX,DLX,Deluxe,1107040.0,2,0.0,,1,0,2138600.0,2138600.0,0.0,False,0.0,0.0,2025-08-01 07:00:00,2025-08-01 10:44:48,2025-08-03 02:04:38,2025-08-03 02:04:45,checkout,"1/8: Combo 1
+2/8: 2 suối
+Dự kiến CI 15g00-16g00
+ Payment: ota_handle_payment",28811,B27682,35328,Louis Low,male,[51897],17,Agoda,18,SO - OTA,,,AG93321753189184N3404,1919550074,AGO,False,,[],Agoda,4,2025-07-22 12:59:46,61709,,False,False,False,False,202,9.0,OTA,True,True,False,False,,
+35273,BL32922,2025-08-05,2025-08-08,11130,SSUT (103),11041,SSUT,SSUT,Kin Inspired 2,1351980.0,3,0.0,,2,0,4055940.0,4055940.0,0.0,False,0.0,0.0,2025-08-05 07:00:00,2025-08-05 18:06:17,2025-08-08 05:00:00,2025-08-08 05:07:27,checkout,"ETA : 1-2AM (6/8)
+Early Booking Saver. Price includes 17% discount!
+ Payment: ota_handle_payment",26987,B25858,58503,Huỳnh Thị Ngọc Chi,male,"[48426, 55455]",17,Agoda,18,SO - OTA,,,AG26B517520407850N3404,1628617661,AGO,091199013045,,[],Agoda,4,2025-07-09 05:59:47,58503,,False,False,False,False,103,9.0,OTA,True,False,False,False,,
+33546,BL31195,2025-08-05,2025-08-06,11131,K Kon (102),11042,K Kon,K Kon,Kin Inspired 3,1309060.0,1,0.0,,2,0,1309060.0,1309060.0,0.0,False,0.0,0.0,2025-08-05 07:00:00,2025-08-05 10:52:19,2025-08-06 05:00:00,2025-08-06 05:14:51,checkout,"pt ng thứ 3 là 189k/ng/đêm
+Early Booking Saver. Price includes 17% discount!
+ Payment: ota_handle_payment",25586,B24457,56209,Saori Takebe,female,"[45882, 55379]",17,Agoda,18,SO - OTA,,,AGF0EE1751159301N3404,1625198729,AGO,TT5183285,,[],Agoda,4,2025-06-29 01:08:23,56209,,False,False,False,False,102,9.0,OTA,True,False,False,False,,
+27414,BL25063,2025-08-17,2025-08-18,11132,STD (101),11037,STD,STD,Standard,816000.0,1,0.0,,2,0,816000.0,816000.0,0.0,Booking canceled from OTA,0.0,816000.0,2025-08-17 07:00:00,False,2025-08-18 05:00:00,False,cancel,"
+ Payment: ota_handle_payment",20560,B19431,22708,TBD*,male,[36858],46,Trip.Com,18,SO - OTA,,,TR0E9A1747645085,999240337280448,TRCO,False,,[],Trip.Com,63,2025-05-19 08:58:08,48112,,False,False,False,2025-06-12 00:50:52,101,9.0,OTA,True,False,False,False,,
+27413,BL25062,2025-08-17,2025-08-18,11133,STD (201),11037,STD,STD,Standard,816000.0,1,0.0,,2,0,816000.0,816000.0,0.0,Booking canceled from OTA,0.0,816000.0,2025-08-17 07:00:00,False,2025-08-18 05:00:00,False,cancel,"
+ Payment: ota_handle_payment",20560,B19431,48112,DI QIANG,male,[36857],46,Trip.Com,18,SO - OTA,,,TR0E9A1747645085,999240337280448,TRCO,False,,[],Trip.Com,63,2025-05-19 08:58:08,48112,,False,False,False,2025-06-12 00:50:52,201,9.0,OTA,True,False,False,False,,
+27412,BL25061,2025-08-17,2025-08-19,11133,STD (201),11037,STD,STD,Standard,816000.0,2,0.0,,2,0,1632000.0,1632000.0,0.0,Booking canceled from OTA,0.0,1632000.0,2025-08-17 07:00:00,False,2025-08-19 05:00:00,False,cancel,"
+ Payment: ota_handle_payment",20559,B19430,22708,TBD*,male,[36856],46,Trip.Com,18,SO - OTA,,,TRF96F1747644690,999240337280448,TRCO,False,,[],Trip.Com,63,2025-05-19 08:51:32,48106,,False,False,False,2025-05-19 08:58:06,201,9.0,OTA,True,False,False,False,,
+27411,BL25060,2025-08-17,2025-08-19,11132,STD (101),11037,STD,STD,Standard,816000.0,2,0.0,,2,0,1632000.0,1632000.0,0.0,Booking canceled from OTA,0.0,1632000.0,2025-08-17 07:00:00,False,2025-08-19 05:00:00,False,cancel,"
+ Payment: ota_handle_payment",20559,B19430,48106,DI QIANG,male,[36855],46,Trip.Com,18,SO - OTA,,,TRF96F1747644690,999240337280448,TRCO,False,,[],Trip.Com,63,2025-05-19 08:51:32,48106,,False,False,False,2025-05-19 08:58:06,101,9.0,OTA,True,False,False,False,,
+27382,BL25031,2025-08-19,2025-08-20,False,False,11037,STD,STD,Standard,816000.0,1,0.0,,2,0,1632000.0,1632000.0,0.0,Booking canceled from OTA,0.0,1632000.0,2025-08-19 07:00:00,False,2025-08-20 05:00:00,False,cancel,"
+ Payment: ota_handle_payment",20546,B19417,22708,TBD*,male,[36816],46,Trip.Com,18,SO - OTA,,,TR32101747639666,999240337189044,TRCO,False,,[],Trip.Com,63,2025-05-19 07:27:48,48074,,False,False,False,2025-05-19 08:46:24,,9.0,OTA,,,False,False,,
+27381,BL25030,2025-08-19,2025-08-20,False,False,11037,STD,STD,Standard,816000.0,1,0.0,,2,0,1632000.0,1632000.0,0.0,Booking canceled from OTA,0.0,1632000.0,2025-08-19 07:00:00,False,2025-08-20 05:00:00,False,cancel,"
+ Payment: ota_handle_payment",20546,B19417,48074,DI QIANG,male,[36815],46,Trip.Com,18,SO - OTA,,,TR32101747639666,999240337189044,TRCO,False,,[],Trip.Com,63,2025-05-19 07:27:48,48074,,False,False,False,2025-05-19 08:46:24,,9.0,OTA,,,False,False,,
+27378,BL25027,2025-08-19,2025-08-21,11132,STD (101),11037,STD,STD,Standard,816000.0,2,0.0,,2,0,1632000.0,1632000.0,0.0,Booking canceled from OTA,0.0,1632000.0,2025-08-19 07:00:00,False,2025-08-21 05:00:00,False,cancel,"
+ Payment: ota_handle_payment",20544,B19415,22708,TBD*,male,[36810],46,Trip.Com,18,SO - OTA,,,TR4ACD1747639040,999240337189044,TRCO,False,,[],Trip.Com,63,2025-05-19 07:17:22,48074,,False,False,False,2025-05-19 07:27:47,101,9.0,OTA,True,False,False,False,,
+27377,BL25026,2025-08-19,2025-08-21,11133,STD (201),11037,STD,STD,Standard,816000.0,2,0.0,,2,0,1632000.0,1632000.0,0.0,Booking canceled from OTA,0.0,1632000.0,2025-08-19 07:00:00,False,2025-08-21 05:00:00,False,cancel,"
+ Payment: ota_handle_payment",20544,B19415,48074,DI QIANG,male,[36809],46,Trip.Com,18,SO - OTA,,,TR4ACD1747639040,999240337189044,TRCO,False,,[],Trip.Com,63,2025-05-19 07:17:22,48074,,False,False,False,2025-05-19 07:27:47,201,9.0,OTA,True,False,False,False,,

@@ -1,4 +1,18 @@
+# Python & venv
+.venv/
+__pycache__/
+*.pyc
+
+# Local env
 .env
-data/
-.\src\cache\GDRIVE_SA_JSON.JSON
-.\src\cache\tokens_cache.json
+*.env
+.env.*.local
+
+# Token cache & any runtime cache
+src/cache/
+*.cache
+*.sqlite
+
+# Service account / private keys (chỉ ví dụ, đừng ignore toàn bộ *.json nếu repo có json khác)
+gdrive_sa_json.json
+

@@ -29,7 +29,7 @@ class TokenInfo:
     expires_at: Optional[datetime.datetime] = None
     service: str = "unknown"
     
-    def is_expired(self, buffer_minutes: int = 5) -> bool:
+    def is_expired(self, buffer_minutes: int = 30) -> bool:
         if not self.expires_at:
             return False
         buffer = datetime.timedelta(minutes=buffer_minutes)
@@ -133,7 +133,7 @@ class TokenManager:
 
         return TokenInfo(
             access_token=token,
-            expires_at=datetime.datetime.utcnow() + datetime.timedelta(hours=1),
+            expires_at=datetime.datetime.utcnow() + datetime.timedelta(hours=2),
             service="pms"
         )
     
@@ -184,7 +184,7 @@ class TokenManager:
         logger.info(f"✅ Odoo token: {external_token[:20]}...")
         return TokenInfo(
             access_token=external_token,
-            expires_at=datetime.datetime.utcnow() + datetime.timedelta(hours=8),
+            expires_at=datetime.datetime.utcnow() + datetime.timedelta(hours=2),
             service="odoo"
         )
     
