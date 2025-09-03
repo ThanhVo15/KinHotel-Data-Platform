@@ -1,18 +1,72 @@
-# Python & venv
-.venv
+# ===================================================================
+# Cấu hình và Dữ liệu nhạy cảm của dự án (Project-specific)
+# TUYỆT ĐỐI KHÔNG BAO GIỜ COMMIT NHỮNG FILE NÀY LÊN GIT
+# ===================================================================
+# File môi trường chứa API keys, mật khẩu...
+.env
+config.yaml
+
+# Thư mục chứa dữ liệu thô hoặc dữ liệu nhạy cảm
+/data/
+
+# Các file credentials và token cache
+/src/cache/gdrive_sa_json.json
+/src/cache/tokens_cache.json
+
+
+# ===================================================================
+# Môi trường ảo Python (Virtual Environments)
+# ===================================================================
+/.venv/
+
+
+
+# ===================================================================
+# File cache và file biên dịch của Python (Python Artifacts)
+# ===================================================================
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# Local env
-.env
-*.env
-.env.*.local
 
-# Token cache & any runtime cache
-src/cache/
-*.cache
-*.sqlite
+# ===================================================================
+# Jupyter Notebooks
+# Thường chứa output nhạy cảm, nên được bỏ qua
+# ===================================================================
+*.ipynb
+.ipynb_checkpoints/
 
-# Service account / private keys (chỉ ví dụ, đừng ignore toàn bộ *.json nếu repo có json khác)
-gdrive_sa_json.json
 
+# ===================================================================
+# Thư mục của IDE và trình soạn thảo (IDE & Editor Folders)
+# ===================================================================
+/.vscode/
+/.idea/
+
+
+# ===================================================================
+# File hệ điều hành (Operating System Files)
+# ===================================================================
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
+desktop.ini
+
+
+# ===================================================================
+# File build và đóng gói (Build & Packaging)
+# ===================================================================
+/build/
+/dist/
+/*.egg-info/
+/wheels/
+
+
+# ===================================================================
+# File liên quan đến kiểm thử (Testing)
+# ===================================================================
+/.pytest_cache/
+/.coverage
+/htmlcov/
