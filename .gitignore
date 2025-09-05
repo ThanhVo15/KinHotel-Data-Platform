@@ -10,8 +10,8 @@ config.yaml
 /data/
 
 # Các file credentials và token cache
-GDRIVE_SA_JSON.JSON
-tokens_cache.jsona
+src/cache/gdrive_sa_json.json
+src/cache/tokens_cache.json
 
 
 # ===================================================================
