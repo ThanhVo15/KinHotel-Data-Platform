@@ -1,4 +1,3 @@
-# src/data_pipeline/clients/pms_client.py
 import aiohttp
 import asyncio
 import logging
@@ -22,11 +21,11 @@ def _parse_codes(s: Optional[str], default: List[int]) -> List[int]:
 
 class PMSClient:
     """
-    Lớp client thuần HTTP cho PMS:
-      - Quản lý base/branch token
-      - Tạo & cache session theo branch (cookie_jar=Dummy tránh WAF)
-      - Gọi GET JSON với retry (đọc cấu hình từ .env)
-      - Phân trang chuẩn theo 'pagination'
+    HTTP client cho PMS:
+      - Base/branch token
+      - Session cache theo branch (DummyCookieJar tránh WAF cookie)
+      - GET JSON với retry cấu hình từ .env
+      - Phân trang theo 'pagination'
     """
 
     def __init__(self, base_url: str):
@@ -34,7 +33,7 @@ class PMSClient:
         self._base_token: Optional[str] = None
         self._sessions: Dict[int, aiohttp.ClientSession] = {}
 
-        # Retry config từ .env (không hardcode)
+        # Retry config từ .env
         self.retry_max_attempts: int = int(os.getenv("RETRY_MAX_ATTEMPTS", "3"))
         self.retry_wait_multiplier: float = float(os.getenv("RETRY_WAIT_MULTIPLIER", "1"))
         self.retry_max_wait: float = float(os.getenv("RETRY_MAX_WAIT", "10"))
@@ -46,10 +45,13 @@ class PMSClient:
             os.getenv("NON_RETRY_STATUS_CODES"),
             [401, 403],
         )
+
+        self.http_connector_limit: int = int(os.getenv("HTTP_CONNECTOR_LIMIT", "5"))  # <= NEW
+
         logger.info(
             f"[PMSClient retry] attempts={self.retry_max_attempts}, mult={self.retry_wait_multiplier}, "
             f"max_wait={self.retry_max_wait}, retry_codes={self.retry_status_codes}, "
-            f"non_retry_codes={self.non_retry_status_codes}"
+            f"non_retry_codes={self.non_retry_status_codes}, http_limit={self.http_connector_limit}"
         )
 
     # ---------------- Token ----------------
@@ -79,7 +81,7 @@ class PMSClient:
             self._sessions[branch_id] = aiohttp.ClientSession(
                 headers=headers,
                 timeout=timeout,
-                connector=aiohttp.TCPConnector(limit=5),
+                connector=aiohttp.TCPConnector(limit=self.http_connector_limit),
                 cookie_jar=aiohttp.DummyCookieJar(),  # KHÔNG dùng cookie dính session cũ
             )
             logger.debug(f"🔗 Created session for branch {branch_id}")

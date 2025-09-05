@@ -11,7 +11,7 @@ config.yaml
 
 # Các file credentials và token cache
 /src/cache/gdrive_sa_json.json
-/src/cache/tokens_cache.json
+/src/cache/tokens_cache.jsona
 
 
 # ===================================================================

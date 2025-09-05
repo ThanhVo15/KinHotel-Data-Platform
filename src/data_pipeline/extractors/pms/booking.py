@@ -1,4 +1,4 @@
-# src/data_pipeline/extractors/pms/booking_list.py
+# src/data_pipeline/extractors/pms/booking.py
 import asyncio
 import logging
 from typing import Any, Dict, List, Optional
@@ -9,13 +9,13 @@ import aiohttp
 
 from ....utils.state_manager import load_last_run_timestamp, save_last_run_timestamp
 from ....utils.date_params import DateWindow, DateField, ICT
-from .pms_extractor import PMSExtractor, ExtractionResult
+from .pms_extractor import PMSExtractor
 from ..abstract_extractor import ExtractionResult
 
 logger = logging.getLogger(__name__)
 
 COLUMNS = [
-    "branch_id", "branch_name",
+    "branch_id",
     "booking_line_id", "booking_line_sequence_id", "booking_id", "booking_sequence_id",
     "sale_order_id",
     "room_id", "room_type_id",
