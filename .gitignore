@@ -8,6 +8,7 @@ config.yaml
 
 # Thư mục chứa dữ liệu thô hoặc dữ liệu nhạy cảm
 /data/
+/config/
 
 # Các file credentials và token cache
 src/cache/gdrive_sa_json.json
