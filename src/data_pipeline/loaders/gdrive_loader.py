@@ -1,135 +1,125 @@
-# src/loaders/gdrive_loader.py
-from __future__ import annotations
+# src/data_pipeline/loaders/gdrive_loader.py
+from pathlib import Path
 import io
-import math
-import logging
-from datetime import datetime, timezone
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from .abstract_loader import AbstractLoader, LoadingResult
 
-import pandas as pd
+# Import các thư viện mới của Google
+from google.oauth2.service_account import Credentials
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
 
-from src.data_pipeline.loaders.abstract_loader import AbstractLoader, LoadArtifact, LoadSummary
-from src.utils.gdrive_client import GoogleDriveClient
+class GoogleDriveLoader(AbstractLoader):
+    """Tải các thư mục dữ liệu lên Google Drive, HỖ TRỢ SHARED DRIVE."""
+    
+    SCOPES = ['https://www.googleapis.com/auth/drive']
 
-logger = logging.getLogger(__name__)
+    def __init__(self, sa_path: str, root_folder_id: str):
+        super().__init__("GoogleDriveLoader")
+        self.root_folder_id = root_folder_id
+        try:
+            creds = Credentials.from_service_account_file(sa_path, scopes=self.SCOPES)
+            self.service = build('drive', 'v3', credentials=creds)
+            self.logger.info("✅ Google Drive authentication successful.")
+        except Exception as e:
+            self.logger.error(f"🔥 Google Drive authentication failed: {e}")
+            raise e
+        
+        self._folder_cache = {}
 
-def _iter_batches(records: Iterable[Dict[str, Any]], batch_size: int):
-    """Yield lists of up to batch_size items."""
-    batch: List[Dict[str, Any]] = []
-    for rec in records:
-        batch.append(rec)
-        if len(batch) >= batch_size:
-            yield batch
-            batch = []
-    if batch:
-        yield batch
+    def _create_or_get_folder(self, parent_folder_id: str, folder_name: str) -> str:
+        """Tìm một thư mục con, nếu không có thì tạo mới. Trả về ID."""
+        cache_key = f"{parent_folder_id}/{folder_name}"
+        if cache_key in self._folder_cache:
+            return self._folder_cache[cache_key]
 
-def _utc_stamp() -> str:
-    return datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%SZ")
+        query = f"'{parent_folder_id}' in parents and name='{folder_name}' and mimeType='application/vnd.google-apps.folder' and trashed=false"
+        
+        # SỬA LỖI: Thêm supportsAllDrives và includeItemsFromAllDrives
+        response = self.service.files().list(
+            q=query, 
+            spaces='drive', 
+            fields='files(id, name)',
+            supportsAllDrives=True,
+            includeItemsFromAllDrives=True
+        ).execute()
+        files = response.get('files', [])
+        
+        if files:
+            folder_id = files[0].get('id')
+            self._folder_cache[cache_key] = folder_id
+            return folder_id
+        else:
+            self.logger.info(f"Folder '{folder_name}' not found, creating it...")
+            file_metadata = {
+                'name': folder_name,
+                'parents': [parent_folder_id],
+                'mimeType': 'application/vnd.google-apps.folder'
+            }
+            # SỬA LỖI: Thêm supportsAllDrives khi tạo folder
+            folder = self.service.files().create(
+                body=file_metadata, 
+                fields='id',
+                supportsAllDrives=True
+            ).execute()
+            folder_id = folder.get('id')
+            self._folder_cache[cache_key] = folder_id
+            return folder_id
 
-class GDriveSilverLoader(AbstractLoader):
-    """
-    Loader Silver:
-      - Lưu PARQUET & SHEET lên Google Drive (trong: silver/pms/{parquet|sheet}/bookings/branch=.../dt=YYYYMMDD/)
-      - Upload theo batch (parquet_batch_size, sheet_batch_size)
-      - Upload song song các batch (max_workers)
-    """
+    def load(self, local_path: str, target_subfolder: str) -> LoadingResult:
+        local_dir = Path(local_path)
+        if not local_dir.is_dir():
+            return LoadingResult(name=self.name, status="error", error=f"Local path not a directory: {local_path}")
 
-    def __init__(self, drive: GoogleDriveClient, *, product_root=("silver", "pms")) -> None:
-        self.drive = drive
-        self.product_root = list(product_root)
+        target_folder_id = self._create_or_get_folder(self.root_folder_id, target_subfolder)
+        result = LoadingResult(name=self.name, target_location=f"Drive Folder ID: {target_folder_id}")
 
-    def load(
-        self,
-        *,
-        dataset: str,                   # "bookings"
-        branch_id: Optional[int],
-        records: Iterable[Dict[str, Any]],
-        parquet_batch_size: int = 100_000,
-        sheet_batch_size: int = 50_000,
-        max_workers: int = 4,
-    ) -> LoadSummary:
-        records = list(records) 
-        # Chuẩn bị folder path
-        today = datetime.now(timezone.utc).strftime("%Y%m%d")
-        # Parquet path
-        parquet_path = self.product_root + ["parquet", dataset, f"branch={branch_id}", f"dt={today}"]
-        sheet_path   = self.product_root + ["sheet",   dataset, f"branch={branch_id}", f"dt={today}"]
+        files_to_process = sorted([f for f in local_dir.rglob('*') if f.is_file()])
+        self.logger.info(f"Found {len(files_to_process)} files to process in '{local_path}'.")
 
-        parquet_folder_id = self.drive.ensure_folder_path(parquet_path)
-        sheet_folder_id   = self.drive.ensure_folder_path(sheet_path)
+        for local_file in files_to_process:
+            relative_path = local_file.relative_to(local_dir)
+            current_parent_id = target_folder_id
+            
+            for part in relative_path.parts[:-1]:
+                current_parent_id = self._create_or_get_folder(current_parent_id, part)
 
-        # Chia records cho 2 luồng batch khác nhau (tránh giữ tất cả trong bộ nhớ)
-        # => Ta sẽ duyệt records 2 lần. Nếu bạn muốn chỉ duyệt 1 lần, có thể cache ra file tạm,
-        #    nhưng phương án này đơn giản và đủ nhanh trong đa số ETL.
-        artifacts: List[LoadArtifact] = []
+            file_name = local_file.name
+            
+            # SỬA LỖI: Thêm supportsAllDrives và includeItemsFromAllDrives khi tìm file
+            query = f"'{current_parent_id}' in parents and name='{file_name}' and trashed=false"
+            response = self.service.files().list(
+                q=query, 
+                spaces='drive', 
+                fields='files(id, name)',
+                supportsAllDrives=True,
+                includeItemsFromAllDrives=True
+            ).execute()
+            existing_files = response.get('files', [])
+            
+            media = MediaFileUpload(str(local_file), resumable=True)
+            
+            if existing_files: # File đã tồn tại -> Update
+                file_id = existing_files[0].get('id')
+                self.logger.info(f"Updating file: {relative_path}...")
+                # SỬA LỖI: Thêm supportsAllDrives khi update
+                self.service.files().update(
+                    fileId=file_id, 
+                    media_body=media,
+                    supportsAllDrives=True
+                ).execute()
+                result.files_updated += 1
+            else: # File chưa có -> Create
+                self.logger.info(f"Uploading new file: {relative_path}...")
+                file_metadata = {'name': file_name, 'parents': [current_parent_id]}
+                # SỬA LỖI: Thêm supportsAllDrives khi tạo file
+                self.service.files().create(
+                    body=file_metadata, 
+                    media_body=media, 
+                    fields='id',
+                    supportsAllDrives=True
+                ).execute()
+                result.files_uploaded += 1
 
-        # -------- PARQUET UPLOAD --------
-        logger.info("Start uploading PARQUET batches...")
-        parquet_jobs = []
-        with ThreadPoolExecutor(max_workers=max_workers) as pool:
-            for i, batch in enumerate(_iter_batches(records, parquet_batch_size), start=1):
-                # Convert batch -> Parquet bytes
-                df = pd.DataFrame.from_records(batch)
-                bio = io.BytesIO()
-                df.to_parquet(bio, index=False)  # yêu cầu pyarrow
-                data = bio.getvalue()
-
-                fname = f"{dataset}_{_utc_stamp()}_part{i}.parquet"
-                fut = pool.submit(self.drive.upload_parquet_bytes, data, parquet_folder_id, fname)
-                parquet_jobs.append((fut, len(df), {"batch": i}))
-
-            for fut, rows, meta in as_completed([j[0] for j in parquet_jobs], timeout=None):
-                pass  # join all futures first to keep order independent
-
-            # Re-collect results with order
-            for fut, rows, meta in parquet_jobs:
-                res = fut.result()
-                artifacts.append(LoadArtifact(
-                    kind="parquet",
-                    id=res["id"],
-                    name=res["name"],
-                    link=res["webViewLink"],
-                    rows=rows,
-                    meta=meta
-                ))
-
-        # -------- SHEET UPLOAD --------
-        logger.info("Start uploading SHEET batches...")
-        sheet_jobs = []
-        with ThreadPoolExecutor(max_workers=max_workers) as pool:
-            part_index = 0
-            # Lưu ý: records đã được iterator tiêu thụ ở vòng parquet. Cần records là list hoặc re-iterable.
-            # => BẮT BUỘC: truyền vào đây là list (ví dụ tres.data). Nếu là generator, hãy list() trước khi load.
-            # Để an toàn: ép cast về list nếu chưa phải list.
-            if not isinstance(records, list):
-                records = list(records)
-
-            for i, batch in enumerate(_iter_batches(records, sheet_batch_size), start=1):
-                df = pd.DataFrame.from_records(batch)
-
-                # Google Drive convert CSV -> Sheet
-                csv_bio = io.BytesIO()
-                df.to_csv(csv_bio, index=False, encoding="utf-8")
-                csv_bytes = csv_bio.getvalue()
-
-                fname = f"{dataset}_branch{branch_id}_{_utc_stamp()}_part{i}"
-                fut = pool.submit(self.drive.upload_csv_as_sheet, csv_bytes, sheet_folder_id, fname)
-                sheet_jobs.append((fut, len(df), {"batch": i}))
-
-            for fut, rows, meta in as_completed([j[0] for j in sheet_jobs], timeout=None):
-                pass
-
-            for fut, rows, meta in sheet_jobs:
-                res = fut.result()
-                artifacts.append(LoadArtifact(
-                    kind="sheet",
-                    id=res["id"],
-                    name=res["name"],
-                    link=res["webViewLink"],
-                    rows=rows,
-                    meta=meta
-                ))
-
-        return LoadSummary(dataset=dataset, branch_id=branch_id, artifacts=artifacts)
+            result.bytes_transferred += local_file.stat().st_size
+            
+        return result

@@ -1,242 +1,175 @@
-# file: src/data_pipeline/schemas/pms_schemas.py
-
-from typing import List, Optional, Any, Union
-from pydantic import BaseModel, Field, validator
+# src/data_pipeline/schemas/pms_schemas.py
+from typing import List, Optional, Any
+from pydantic import BaseModel, Field
 from datetime import date, datetime
 
-
-def false_to_none(value: Any) -> Any:
-    """Một validator để chuyển đổi giá trị boolean False thành None."""
-    if isinstance(value, bool) and not value:
-        return None
-    return value
-
-# ====== FACT BOOKING ========
-class PricelistModel(BaseModel):
-    id: int
-    name: str
-
-class RoomStatusModel(BaseModel):
-    is_clean: bool
-    is_occupied: bool
-
-class SurveyModel(BaseModel):
-    is_checkin: bool
-    is_checkout: bool
-
-class LabelModel(BaseModel):
-    name: str
-    color: str
-
 class FactBooking(BaseModel):
-    # --- ID & Sequence ---
+    """
+    Schema này ánh xạ trực tiếp đến các cột phẳng (flattened) mà Parser tạo ra.
+    Đây là nguồn chân lý duy nhất cho cấu trúc bảng historical.
+    """
+    # --- ID Keys ---
     booking_line_id: int
-    booking_line_sequence_id: str
     booking_id: int
-    booking_sequence_id: str
+    branch_id: int
+    booking_line_sequence_id: Optional[str] = None
+    booking_sequence_id: Optional[str] = None
     
     # --- Dates & Times ---
-    check_in_date: date
-    check_out_date: date
-    create_date: datetime
-    check_in: datetime 
-    check_out: datetime 
-    actual_check_in: Optional[datetime] = None
-    actual_check_out: Optional[datetime] = None
-    cancelled_at: Optional[datetime] = None 
+    create_datetime: datetime
+    check_in_datetime: datetime 
+    check_out_datetime: datetime 
+    actual_check_in_datetime: Optional[datetime] = None
+    actual_check_out_datetime: Optional[datetime] = None
+    cancelled_at_datetime: Optional[datetime] = None 
 
     # --- Room Info ---
     room_id: Optional[int] = None
-    room_name: Optional[str] = None
     room_type_id: int
     
     # --- Price & Financials ---
-    price: float
-    subtotal_price: float
-    total_price: float
-    paid_amount: float
-    remain_amount: float
-    balance: float
-    pricelist: Optional[PricelistModel] = None
+    price: Optional[float] = None
+    subtotal_price: Optional[float] = None
+    total_price: Optional[float] = None
+    paid_amount: Optional[float] = None
+    remain_amount: Optional[float] = None
+    balance: Optional[float] = None
+    
+    pricelist_id: Optional[int] = None
+    pricelist_name: Optional[str] = None
 
     # --- Guest & Occupancy ---
-    adult: int
-    child: int
-    partner_id: int
-    booking_line_guest_ids: List[int]
+    num_adult: Optional[float] = None
+    num_child: Optional[float] = None
+    customer_id: Optional[int] = None
+    booking_line_guest_ids: Optional[str] = None
 
     # --- Booking Details ---
-    booking_days: int
-    status: str
+    booking_days: Optional[float] = None
+    status: Optional[str] = None
     note: Optional[str] = None
-    is_foc: bool
+    is_foc: Optional[bool] = None
     reason_approve_by: Optional[str] = None
-    foc_level: Optional[str] = None
+    foc_level: Optional[Any] = None
 
     # --- Cancellation ---
-    cancel_price: float
+    cancel_price: Optional[float] = None
     cancel_reason: Optional[str] = None
     
     # --- Marketing & Source ---
-    source_id: int
-    medium_id: int
+    source_id: Optional[int] = None
+    medium_id: Optional[int] = None
     campaign_id: Optional[int] = None
-    hotel_travel_agency_id: int
+    hotel_travel_agency_id: Optional[int] = None
 
     # --- CMS & Grouping ---
     cms_booking_id: Optional[str] = None
     cms_ota_id: Optional[str] = None
     cms_booking_source: Optional[str] = None 
-    group_id: int
+    group_id: Optional[int] = None
     group_master_name: Optional[str] = None 
     group_master: Optional[str] = None
 
-    # --- Nested Objects & Other ---
-    room_status: Optional[RoomStatusModel] = None
-    surveys: SurveyModel
-    labels: List[LabelModel] = []
-    sale_order_id: Optional[str] = None #sale_order_name
+    # --- Other Flat Columns ---
+    room_is_clean: Optional[bool] = None
+    room_is_occupied: Optional[bool] = None
+    survey_is_checkin: Optional[bool] = None
+    survey_is_checkout: Optional[bool] = None
+    
+    labels: Optional[str] = None
+    sale_order_id: Optional[str] = None
     partner_identification: Optional[str] = None
     
-    _validate_false_to_none = validator(
-        "cancelled_at",
-        "room_id",
-        "room_name",
-        "note",
-        "reason_approve_by",
-        "foc_level",
-        "cancel_reason",
-        "cms_booking_id",
-        "cms_ota_id",
-        "cms_booking_source",
-        "partner_identification",
-        pre=True, 
-        allow_reuse=True
-    )(false_to_none)
-    
     class Config:
         extra = 'ignore'
 
-# ====== DIM DATE ========
 class DimDate(BaseModel):
-    """
-    Standard Date Dimension Schema - Industry Best Practice
-    Covers all common date attributes for reporting & analytics
-    """
-    # === PRIMARY KEY ===
-    date_key: int  # YYYYMMDD format: 20240825
-    
-    # === FULL DATE ===
-    full_date: date  # 2024-08-25
-    
-    # === YEAR ATTRIBUTES ===
-    year: int  # 2024
-    
-    # === QUARTER ATTRIBUTES ===
-    quarter: int  # 3
-    quarter_name: str  # "Q3 2024"
-    quarter_start_date: date  # 2024-07-01
-    quarter_end_date: date  # 2024-09-30
-    
-    # === MONTH ATTRIBUTES ===
-    month: int  # 8
-    month_name: str  # "August"
-    month_name_short: str  # "Aug"
-    month_year: str  # "August 2024"
-    month_start_date: date  # 2024-08-01
-    month_end_date: date  # 2024-08-31
-    
-    # === WEEK ATTRIBUTES ===
-    week_of_year: int  # 34
-    week_of_month: int  # 4
-    week_start_date: date  # Monday of this week
-    week_end_date: date  # Sunday of this week
-    
-    # === DAY ATTRIBUTES ===
-    day_of_month: int  # 25
-    day_of_year: int  # 238
-    day_of_week: int  # 7 (1=Mon, 7=Sun)
-    day_name: str  # "Sunday"
-    day_name_short: str  # "Sun"
-    
-    # === BUSINESS ATTRIBUTES ===
-    is_weekend: bool  # True
-    is_weekday: bool  # False
-    is_holiday: bool = False  # Custom holidays
-    holiday_name: Optional[str] = None  # "Christmas"
-    
-    # === PERIOD FLAGS ===
-    is_month_start: bool  # False
-    is_month_end: bool  # False
-    is_quarter_start: bool  # False
-    is_quarter_end: bool  # False
-    is_year_start: bool  # False
-    is_year_end: bool  # False
-    
-    # === RELATIVE DATE CALCULATIONS ===
-    days_from_today: Optional[int] = None
-    
-    class Config:
-        extra = 'ignore'
+    date_key: int
+    full_date: date
+    year: int
+    quarter: int
+    quarter_name: str
+    month: int
+    month_name: str
+    month_name_short: str
+    month_year: str
+    week_of_year: int
+    day_of_month: int
+    day_of_year: int
+    day_of_week: int
+    day_name: str
+    day_name_short: str
+    is_weekend: bool
+    is_weekday: bool
+    is_month_start: bool
+    is_month_end: bool
+    is_quarter_start: bool
+    is_quarter_end: bool
+    is_year_start: bool
+    is_year_end: bool
 
-# ====== DIM DATE ========
 class DimMajorMarket(BaseModel):
-    """
-    Standard Major Market Dimension Schema - Industry Best Practice
-    Covers all common date attributes for reporting & analytics
-    """
     price_list_id: str
     price_list_name: str
     name: str
     price: float
 
-    class Config:
-        extra = 'ignore'
+class Branch(BaseModel):
+    id: int
+    name: str
+    address: Optional[str] = None
+    phone_contact: Optional[str] = None
+    location: Optional[str] = None
 
-# # ====== DIM BRANCH ========
-# class DimBranch(BaseModel):
-#     """Schema cho bang Dim_Branch"""
-#     branch_id: int
-#     branch_name: str
-#     address: str
-#     phone: str
-#     total_rooms: int
+class TravelAgency(BaseModel):
+    id: int
+    name: str
+    invoice_name: Optional[str] = None
+    external_id: Optional[str] = None
+    notes: Optional[str] = None
+    is_travel_agency: Optional[bool] = False
+    is_company: Optional[bool] = False
+    is_system: Optional[bool] = False
+    source_name: Optional[str] = None
+    medium_name: Optional[str] = None
+    country_name: Optional[str] = None
+    vat: Optional[str] = None
+    email: Optional[str] = None
+    address: Optional[str] = None
+    commission_rate: Optional[float] = 0.0
+    is_commission_deducted: Optional[bool] = False
+    source_id: Optional[int] = None
+    medium_id: Optional[int] = None
+    country_id: Optional[int] = None
 
-# # ====== DIM MEDIUM ========
-# class DimMedium(BaseModel):
-#     """Schema cho bang Dim_Medium"""
-#     medium_id: int
-#     medium_name: str
+class Country(BaseModel):
+    id: int
+    name: str
+    iso_code: Optional[str] = None
 
-# # ====== DIM SOURCE ========
-# class DimBranch(BaseModel):
-#     """Schema cho bang Dim_Source"""
-#     source_id: int
-#     source_name: str
+class UtmMedium(BaseModel):
+    id: int
+    name: str
 
-# # ====== DIM CAMPAIGN ========
-# class DimBranch(BaseModel):
-#     """Schema cho bang Dim_Source"""
-#     campaign_id: int
-#     campaign_name: str
+class UtmSource(BaseModel):
+    id: int
+    name: str
 
-# ====== DIM CAMPAIGN ========
-# class DimTravelAgency(BaseModel):
-#     """Schema cho bang DimTravelAgency"""
-#     travel_agency_id: int
-#     name: str
-#     invoice_name: str
-#     external_id: str
-#     notes: str
-#     is_travel_agency: bool
-#     is_company: bool
-#     is_system: bool
-#     source_id: int
-#     medium_id: int
-#     coutry_id: int
-#     vat: 
-
-    
-
-    
-
+class Customer(BaseModel):
+    id: int
+    name: str
+    dob: Optional[date] = None
+    gender: Optional[str] = None
+    phone: Optional[str] = None
+    email: Optional[str] = None
+    identification: Optional[str] = None
+    company_type: Optional[str] = None
+    comment: Optional[str] = None
+    contact_address_complete: Optional[str] = None
+    street: Optional[str] = None
+    attachments: Optional[str] = None
+    state_id: Optional[int] = None
+    state_name: Optional[str] = None
+    country_id: Optional[int] = None
+    country_name: Optional[str] = None
+    vat: Optional[str] = None

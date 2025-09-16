@@ -1,3 +1,4 @@
+# E:\Job\Kin-Hotel\DE\KinHotelAutoDashboard\src\utils\state_manager.py
 """This module centralizes the logic for persisting the pipeline's state.
 By saving the last successful timestamp to a file, we can avoid re-fetching
 the same data, making subsequent runs faster and more efficient."""

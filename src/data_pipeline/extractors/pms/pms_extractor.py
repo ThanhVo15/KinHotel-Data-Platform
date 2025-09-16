@@ -1,4 +1,4 @@
-# src/data_pipeline/extractors/pms/pms_extractor.py
+# E:\Job\Kin-Hotel\DE\KinHotelAutoDashboard\src\data_pipeline\extractors\pms\pms_extractor.py
 import asyncio
 import random
 from datetime import datetime, timezone, timedelta
@@ -46,10 +46,6 @@ class PMSExtractor(AbstractExtractor):
         return await self.client.get_json(session, url, params)
 
     async def _paginate(self, session, url: str, base_params: Dict[str, Any], *, limit_default: int = 100):
-        # url đưa vào đây là dạng đầy đủ; để tái dùng client, ta trích endpoint
-        # nhưng để đơn giản & không đụng nhiều, cho phép chuyền endpoint trực tiếp từ lớp con:
-        # nếu url đã là base_url + endpoint, ta chỉ cần gọi client.paginate_json với endpoint
-        # => tách endpoint từ url:
         endpoint = url.split(self.client.base_url)[-1]
         return await self.client.paginate_json(session, endpoint, base_params, limit_default=limit_default)
 
@@ -67,22 +63,23 @@ class PMSExtractor(AbstractExtractor):
         source_name = f"PMS:{getattr(self, 'ENDPOINT', 'Unknown')}"
 
         try:
-            session = await self._get_session(branch_id)
+            session = await self.client.get_session(branch_id)
             self.logger.info(f"🚀 Starting extraction for {branch_name} - {source_name}")
 
-            all_records = await self._perform_extraction(session, branch_id, **kwargs)
+            # _perform_extraction trả về dữ liệu thô
+            raw_records = await self._perform_extraction(session, branch_id, **kwargs)
 
             duration = (datetime.now(timezone.utc) - start_time).total_seconds()
             self.logger.info(
-                f"✅ Extracted {len(all_records)} records from {branch_name} for endpoint '{source_name}' in {duration:.2f}s."
+                f"✅ Extracted {len(raw_records)} raw records from {branch_name} for '{source_name}' in {duration:.2f}s."
             )
 
             return ExtractionResult(
-                data=all_records,
+                data=raw_records, 
                 source=source_name,
                 branch_id=branch_id,
                 branch_name=branch_name,
-                record_count=len(all_records),
+                record_count=len(raw_records),
                 **kwargs,
             )
         except Exception as e:
@@ -101,46 +98,67 @@ class PMSExtractor(AbstractExtractor):
     def validate_config(self) -> bool:
         return bool(self.client and self.client.base_url)
     
-        # ===== NEW: dựng DateWindow từ watermark state có sẵn =====
+    # Thêm một hằng số để dễ quản lý
+    INITIAL_START_DATE = datetime(2023, 6, 1, tzinfo=timezone.utc)
+
     def _build_window_from_state(
         self,
         *,
-        endpoint: str,      # ví dụ: "bookings"
-        field: str,         # "check_in" hoặc "create"
+        endpoint: str,
+        field: str,
         branch_id: int,
-        lookback_days: int = 1
+        lookback_days: int,
     ) -> DateWindow:
         """
-        Lấy watermark từ state (UTC). Nếu chưa có → dùng now - lookback_days.
-        Cửa sổ: (last_run + 1s) → now  để tránh trùng mép.
+        Xác định cửa sổ thời gian một cách thông minh dựa trên chiến lược của 'field'.
+
+        Chiến lược:
+        1. LẦN ĐẦU TIÊN (chưa có state): Luôn lấy từ ngày bắt đầu cố định.
+        2. FIELD 'check_in', 'create', ...: Luôn dùng chiến lược ROLLING LOOKBACK (lấy N ngày gần nhất).
+        3. FIELD 'update', 'last_updated', ...: Dùng chiến lược DELTA (lấy từ lần chạy cuối).
         """
         source_key = f"{endpoint}:{field}"
         now_utc = datetime.now(timezone.utc)
 
-        last_run_utc = load_last_run_timestamp(source_key, branch_id)
-        if last_run_utc:
-            start_utc = last_run_utc + timedelta(seconds=1)
-        else:
+        last_run_utc = load_last_run_timestamp(source=source_key, branch_id=branch_id)
+
+        # 1. Xử lý lần chạy đầu tiên cho source_key này
+        if not last_run_utc:
+            self.logger.info(f"FIRST RUN for '{source_key}' on branch {branch_id}. Backfilling from {self.INITIAL_START_DATE.date()}.")
+            start_utc = self.INITIAL_START_DATE
+            return DateWindow.from_utc(start_utc, now_utc, field=field, tz=ICT)
+
+        # 2. Xử lý các lần chạy tiếp theo dựa trên 'field'
+        # Các field dùng chiến lược ROLLING LOOKBACK
+        if field in ("check_in", "created_date"):
+            self.logger.info(f"ROLLING LOOKBACK strategy for '{source_key}' on branch {branch_id}. Using {lookback_days} days.")
             start_utc = now_utc - timedelta(days=lookback_days)
 
-        return DateWindow.from_utc(start=start_utc, end=now_utc, field=field, tz=ICT)
+        # Các field dùng chiến lược DELTA (ví dụ: `update_from`)
+        elif field in ("update", "update_from", "last_updated"):
+            self.logger.info(f"DELTA strategy for '{source_key}' on branch {branch_id}. Loading from {last_run_utc.isoformat()}.")
+            start_utc = last_run_utc - timedelta(minutes=15)
+        
+        # Chiến lược mặc định nếu field không được định nghĩa rõ ràng
+        else:
+            self.logger.warning(f"Unknown field strategy for '{field}'. Defaulting to DELTA strategy.")
+            start_utc = last_run_utc - timedelta(minutes=15)
 
-    # ===== NEW: incremental cho nhiều branch, dùng watermark chuẩn =====
+        return DateWindow.from_utc(start_utc, now_utc, field=field, tz=ICT)
+
     async def extract_incremental(
         self,
         *,
-        endpoint: str,              # ví dụ "bookings"
-        field: str = "check_in",    # hoặc "create"
+        endpoint: str,
+        field: str = "check_in",
         branch_ids: Optional[List[int]] = None,
-        lookback_days: int = 1,
+        lookback_days: int = 30, # Đổi mặc định về 30
         max_concurrent: int = 5,
         jitter_max_s: float = 0.8,
         **kwargs
     ) -> Dict[int, ExtractionResult]:
         """
-        - Tạo DateWindow từ state (per endpoint+field+branch).
-        - Gọi extract_async(branch_id, date_window=dw, **kwargs) cho từng branch.
-        - Nếu OK → lưu watermark = dw.end (UTC) bằng state_manager hiện tại.
+        Hàm điều phối chính, giờ đây sử dụng logic _build_window_from_state đã được nâng cấp.
         """
         if branch_ids is None:
             branch_ids = list(self.TOKEN_BRANCH_MAP.keys())
@@ -151,18 +169,25 @@ class PMSExtractor(AbstractExtractor):
         async def _run_one(bid: int):
             async with sem:
                 try:
+                    # Gọi hàm logic tập trung
                     dw = self._build_window_from_state(
-                        endpoint=endpoint, field=field, branch_id=bid, lookback_days=lookback_days
+                        endpoint=endpoint,
+                        field=field,
+                        branch_id=bid,
+                        lookback_days=lookback_days
                     )
-                    # Tránh cùng nổ vào page 1 → giảm dính WAF
+                    
                     await asyncio.sleep(random.random() * jitter_max_s)
 
                     res = await self.extract_async(branch_id=bid, date_window=dw, **kwargs)
                     results[bid] = res
 
+                    # Chỉ lưu state nếu chạy thành công
                     if res.is_success:
-                        # LƯU Ý: state_manager hiện tại nhận đối số theo đúng thứ tự (không keyword)
-                        save_last_run_timestamp(f"{endpoint}:{field}", bid, dw.end.astimezone(timezone.utc))
+                        source_key = f"{endpoint}:{field}"
+                        # dw.end đã là UTC
+                        save_last_run_timestamp(source_key, bid, dw.end)
+
                 except Exception as e:
                     results[bid] = ExtractionResult(
                         data=None,

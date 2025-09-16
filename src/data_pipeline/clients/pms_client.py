@@ -1,3 +1,4 @@
+# E:\Job\Kin-Hotel\DE\KinHotelAutoDashboard\src\data_pipeline\clients\pms_client.py
 import aiohttp
 import asyncio
 import logging
@@ -58,7 +59,7 @@ class PMSClient:
     def _get_base_token(self) -> str:
         if self._base_token is None:
             self._base_token = get_pms_token()
-            logger.info(f"🔧 Extracted base token from: {self._base_token[:20]}...")
+            logger.info(f"🔧 Extracted base token from: {self._base_token[:10]}...")
         return self._base_token
 
     def get_branch_token(self, branch_id: int) -> str:
@@ -82,7 +83,7 @@ class PMSClient:
                 headers=headers,
                 timeout=timeout,
                 connector=aiohttp.TCPConnector(limit=self.http_connector_limit),
-                cookie_jar=aiohttp.DummyCookieJar(),  # KHÔNG dùng cookie dính session cũ
+                cookie_jar=aiohttp.DummyCookieJar(),
             )
             logger.debug(f"🔗 Created session for branch {branch_id}")
         return self._sessions[branch_id]

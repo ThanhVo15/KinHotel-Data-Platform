@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pipeline Report</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 20px; color: #333; }
+        h1, h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px;}
+        .summary { background-color: #ecf0f1; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .status-success { color: #27ae60; font-weight: bold; }
+        .status-failed, .status-error { color: #e74c3c; font-weight: bold; }
+        .status-skipped { color: #95a5a6; font-weight: bold; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; font-size: 14px; }
+        th, td { border: 1px solid #bdc3c7; padding: 10px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .error-details { background-color: #f2dede; border-left: 5px solid #e74c3c; padding: 10px; margin-top: 10px; white-space: pre-wrap; word-wrap: break-word; font-family: 'Courier New', Courier, monospace; }
+    </style>
+</head>
+<body>
+    <h1>Pipeline Data Report - {{ report.execution_date }}</h1>
+    <div class="summary">
+        <strong>Overall Status:</strong> 
+        <span class="status-{{ report.overall_status|lower }}">
+            {{ report.overall_status }}
+        </span><br>
+        <strong>Total Execution Time:</strong> {{ "%.2f"|format(report.total_time_seconds) }} seconds
+    </div>
+
+    {% if report.error %}
+    <h2>💥 Critical Error Details</h2>
+    <div class="error-details"><pre><code>{{ report.error }}</code></pre></div>
+    {% endif %}
+
+    <h2>📥 Phase 1: Staging Layer (Tải dữ liệu thô)</h2>
+    <table>
+        <tr><th>Branch ID</th><th>Extracted Records</th><th>Status</th></tr>
+        {% for branch_id, stats in report.staging|dictsort %}
+        <tr>
+            <td>{{ branch_id }}</td>
+            <td>{{ stats.record_count }}</td>
+            <td class="status-{{ stats.status|lower }}">{{ stats.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>🗂️ Phase 2.1: Historical Layer (Theo dõi thay đổi)</h2>
+    <table>
+        <tr><th>Branch ID</th><th>Mới</th><th>Thay đổi</th><th>Không đổi</th><th>Thời gian (giây)</th><th>Status</th></tr>
+        {% for branch_id, stats in report.historical|dictsort %}
+        <tr>
+            <td>{{ branch_id }}</td>
+            <td style="color: #27ae60;">{{ stats.new_records }}</td>
+            <td style="color: #f39c12;">{{ stats.updated_records }}</td>
+            <td>{{ stats.unchanged_records }}</td>
+            <td>{{ "%.2f"|format(stats.duration_seconds) }}</td>
+            <td class="status-{{ stats.status|lower }}">{{ stats.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>📊 Phase 2.2: Data Warehouse Layer (Kết quả cuối cùng)</h2>
+    <table>
+        <tr><th>Processor</th><th>Input Records</th><th>Output Records</th><th>Thời gian (giây)</th><th>Status</th></tr>
+        {% for name, stats in report.dwh|dictsort %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ stats.input_records }}</td>
+            <td>{{ stats.output_records }}</td>
+            <td>{{ "%.2f"|format(stats.duration_seconds) }}</td>
+            <td class="status-{{ stats.status|lower }}">{{ stats.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>☁️ Phase 3: Google Drive Upload</h2>
+    <table>
+        <tr><th>Layer</th><th>Files Uploaded</th><th>Files Updated</th><th>Status</th></tr>
+        {% for layer, stats in report.gdrive|dictsort %}
+        <tr>
+            <td>{{ layer|capitalize }}</td>
+            <td>{{ stats.files_uploaded }}</td>
+            <td>{{ stats.files_updated }}</td>
+            <td class="status-{{ stats.status|lower }}">{{ stats.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

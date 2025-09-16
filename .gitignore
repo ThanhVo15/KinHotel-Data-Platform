@@ -13,6 +13,7 @@ config.yaml
 # Các file credentials và token cache
 src/cache/gdrive_sa_json.json
 src/cache/tokens_cache.json
+config/kindw-471805-f1cacb838faa.json
 
 
 # ===================================================================
