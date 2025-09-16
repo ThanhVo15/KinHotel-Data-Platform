@@ -1,3 +1,4 @@
+# src/data_pipeline/loaders/email_notifier.py
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -8,7 +9,7 @@ import io
 from typing import List, Dict
 from pathlib import Path
 
-from .abstract_loader import AbstractLoader, LoadingResult
+from src.data_pipeline.core.abstract_loader import AbstractLoader, LoadingResult
 
 try:
     from jinja2 import Environment, FileSystemLoader
@@ -17,17 +18,12 @@ except ImportError:
     JINJA2_AVAILABLE = False
 
 class EmailNotifier(AbstractLoader):
-    """Gửi email báo cáo, có khả năng đính kèm báo cáo chất lượng dữ liệu."""
     def __init__(self, smtp_server: str, port: int, sender: str, password: str, recipient: str):
         super().__init__("EmailNotifier")
         if not JINJA2_AVAILABLE:
             raise ImportError("Jinja2 not found. Please run 'pip install Jinja2'")
         
-        self.smtp_server = smtp_server
-        self.port = port
-        self.sender = sender
-        self.password = password
-        self.recipient = recipient
+        self.smtp_server, self.port, self.sender, self.password, self.recipient = smtp_server, port, sender, password, recipient
         
         template_dir = Path(__file__).parent / "templates"
         self.jinja_env = Environment(loader=FileSystemLoader(template_dir), autoescape=True)
@@ -36,12 +32,14 @@ class EmailNotifier(AbstractLoader):
         template = self.jinja_env.get_template("report.template.html")
         return template.render(report=report_data)
 
-    def _create_dq_attachment(self, dq_issues: List[Dict]) -> MIMEBase:
+    # --- HÀM MỚI ĐỂ TẠO FILE CSV ĐÍNH KÈM ---
+    def _create_dq_attachment(self, dq_issues: List[Dict]) -> MIMEBase | None:
         """Tạo file báo cáo chất lượng dữ liệu (CSV) để đính kèm."""
         if not dq_issues:
             return None
         
         df = pd.DataFrame(dq_issues)
+        # Sử dụng buffer trong bộ nhớ để không cần tạo file thật
         csv_buffer = io.StringIO()
         df.to_csv(csv_buffer, index=False, encoding='utf-8-sig')
         
@@ -64,9 +62,10 @@ class EmailNotifier(AbstractLoader):
             html_body = self._build_html_report(report_data)
             msg.attach(MIMEText(html_body, 'html'))
             
+            # --- BỔ SUNG LOGIC ĐÍNH KÈM FILE ---
             dq_issues = report_data.get("data_quality_issues")
             if dq_issues:
-                self.logger.info(f"Đang tạo báo cáo cho {len(dq_issues)} vấn đề chất lượng dữ liệu...")
+                self.logger.info(f"Found {len(dq_issues)} data quality issues. Creating attachment...")
                 dq_attachment = self._create_dq_attachment(dq_issues)
                 if dq_attachment:
                     msg.attach(dq_attachment)

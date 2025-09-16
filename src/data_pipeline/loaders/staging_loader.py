@@ -5,7 +5,7 @@ from typing import Optional
 from datetime import date, datetime
 import logging
 
-from .abstract_loader import AbstractLoader, LoadingResult
+from src.data_pipeline.core.abstract_loader import AbstractLoader, LoadingResult
 
 class StagingLoader(AbstractLoader):
     """

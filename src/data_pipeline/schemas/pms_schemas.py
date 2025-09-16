@@ -173,3 +173,24 @@ class Customer(BaseModel):
     country_id: Optional[int] = None
     country_name: Optional[str] = None
     vat: Optional[str] = None
+
+class RoomLock(BaseModel):
+    """
+    Schema cho dữ liệu Khóa phòng (Room Lock).
+    Ánh xạ tới các cột sau khi đã được làm phẳng (flatten).
+    """
+    id: int
+    reason: Optional[str] = None
+    room_id: int
+    room_no: Optional[str] = None
+    room_name: Optional[str] = None
+    room_type_name: Optional[str] = None
+    start_date: datetime
+    end_date: datetime
+    original_end_date: Optional[datetime] = None
+    create_username: Optional[str] = None
+    create_date: datetime
+    active: bool
+
+    class Config:
+        extra = 'ignore'

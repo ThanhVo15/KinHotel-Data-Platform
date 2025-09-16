@@ -46,7 +46,8 @@ REQUIRED_ENV_VARS = {
 
     'STAGING_DIR',
     'HISTORICAL_DIR',
-    'DWH_DIR'
+    'DWH_DIR',
+    'QUARANTINE_DIR'
 }
 
 def validate_env_value(key: str, value: str) -> bool:
@@ -184,7 +185,8 @@ def get_config() -> dict:
         'paths': {
             'staging_dir': os.getenv('STAGING_DIR'),
             'historical_dir': os.getenv('HISTORICAL_DIR'),
-            'datawarehouse_dir': os.getenv('DWH_DIR')
+            'datawarehouse_dir': os.getenv('DWH_DIR'),
+            'quarantine_dir': os.getenv('QUARANTINE_DIR')
         }
     }
 

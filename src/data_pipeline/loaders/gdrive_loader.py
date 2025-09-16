@@ -1,7 +1,7 @@
 # src/data_pipeline/loaders/gdrive_loader.py
 from pathlib import Path
 import io
-from .abstract_loader import AbstractLoader, LoadingResult
+from src.data_pipeline.core.abstract_loader import AbstractLoader, LoadingResult
 
 # Import các thư viện mới của Google
 from google.oauth2.service_account import Credentials

@@ -6,7 +6,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 import pandas as pd
 
-from data_pipeline.extractors.pms.booking import BookingListExtractor
+from data_pipeline.data_pipelines.booking.extractor import BookingListExtractor
 from src.utils.env_utils import get_config
 from src.utils.state_manager import load_last_run_timestamp, save_last_run_timestamp
 
