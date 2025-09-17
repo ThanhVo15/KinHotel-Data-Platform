@@ -1,4 +1,3 @@
-# E:\Job\Kin-Hotel\DE\KinHotelAutoDashboard\src\data_pipeline\clients\pms_client.py
 import aiohttp
 import asyncio
 import logging
@@ -47,7 +46,7 @@ class PMSClient:
             [401, 403],
         )
 
-        self.http_connector_limit: int = int(os.getenv("HTTP_CONNECTOR_LIMIT", "5"))  # <= NEW
+        self.http_connector_limit: int = int(os.getenv("HTTP_CONNECTOR_LIMIT", "5")) 
 
         logger.info(
             f"[PMSClient retry] attempts={self.retry_max_attempts}, mult={self.retry_wait_multiplier}, "

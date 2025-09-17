@@ -1,4 +1,3 @@
-# src/data_pipeline/pipelines/dimensions/transformer.py
 import pandas as pd
 import logging
 import re
@@ -6,7 +5,6 @@ import json
 from typing import Dict, Any, Type, List
 from pydantic import BaseModel, ValidationError
 
-# --- Import các thành phần Core ---
 from src.data_pipeline.core.abstract_processor import AbstractProcessor
 
 logger = logging.getLogger(__name__)

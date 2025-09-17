@@ -1,12 +1,10 @@
-# src/data_pipeline/pipelines/booking/processors.py
 import pandas as pd
 from pathlib import Path
 
-# --- Import các thành phần từ core và utils ---
-from ...core.dwh_processor import DWHModelProcessor
-from ...core.abstract_processor import ProcessingResult
-from ....utils.date_utils import create_dim_date
-from ...schemas import pms_schemas
+from src.data_pipeline.core.dwh_processor import DWHModelProcessor
+from src.data_pipeline.core.abstract_processor import ProcessingResult
+from src.utils.date_utils import create_dim_date
+from src.data_pipeline.schemas import pms_schemas
 
 class FactBookingProcessor(DWHModelProcessor):
     def __init__(self, execution_historical_dir: Path, dwh_dir: Path):

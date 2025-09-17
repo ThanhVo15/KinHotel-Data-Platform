@@ -1,12 +1,11 @@
-# src/data_pipeline/pipelines/dimensions/processor.py
 import pandas as pd
 from pathlib import Path
 from typing import List, Dict, Any, Type, Tuple
 from pydantic import BaseModel
 import json
 
-from ...core.dwh_processor import DWHModelProcessor
-from ...core.abstract_processor import ProcessingResult
+from src.data_pipeline.core.dwh_processor import DWHModelProcessor
+from src.data_pipeline.core.abstract_processor import ProcessingResult
 
 class GenericDimProcessor(DWHModelProcessor):
     def __init__(self, execution_historical_dir: Path, dwh_dir: Path, dataset_name: str, dwh_table_name: str, dwh_columns: Dict[str, str], clean_schema: Type[BaseModel], primary_key: str):

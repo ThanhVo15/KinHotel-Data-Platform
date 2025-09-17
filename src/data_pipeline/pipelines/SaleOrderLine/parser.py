@@ -1,4 +1,3 @@
-# src/data_pipeline/pipelines/odoo/parser.py
 import pandas as pd
 import io
 from typing import List, Dict, Any

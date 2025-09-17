@@ -1,4 +1,3 @@
-# E:\Job\Kin-Hotel\DE\KinHotelAutoDashboard\src\data_pipeline\pipelines\dimensions\extractor.py
 import asyncio
 import logging
 from typing import Dict, Any, List, Optional
@@ -31,7 +30,7 @@ class DimensionExtractor(AbstractExtractor):
         base_params = self.config.get("base_params", {})
 
         if self.config['is_paginated']:
-            return await self.client.paginate_json(session, self.endpoint, base_params=base_params) # <-- Dòng này đã được cập nhật
+            return await self.client.paginate_json(session, self.endpoint, base_params=base_params)
         else:
             full_url = f"{self.client.base_url.rstrip('/')}/{self.endpoint.lstrip('/')}"
             json_data, _ = await self.client.get_json(session, full_url, params={})
@@ -93,7 +92,7 @@ class DimensionExtractor(AbstractExtractor):
                         record_count=result.record_count
                     )
                 else:
-                    results[bid] = result # Trả về lỗi nếu có
+                    results[bid] = result
         else:
             # Nếu dữ liệu theo từng chi nhánh, gọi API song song cho mỗi chi nhánh
             logger.info(f"Fetching PER-BRANCH dimension '{self.name}' for {len(branch_ids)} branches.")

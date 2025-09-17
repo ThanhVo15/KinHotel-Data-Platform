@@ -1,12 +1,11 @@
-# E:\Job\Kin-Hotel\DE\KinHotelAutoDashboard\src\data_pipeline\extractors\pms\booking.py
 import aiohttp
 import logging
 from typing import Any, Dict, List, Optional
 from datetime import datetime, timezone
 
-from ...core.pms.pms_extractor import PMSExtractor
-from ....core.abstract_extractor import ExtractionResult
-from ....utils.date_params import DateWindow
+from src.data_pipeline.core.pms.pms_extractor import PMSExtractor
+from src.data_pipeline.core.abstract_extractor import ExtractionResult
+from utils.date_params import DateWindow
 
 logger = logging.getLogger(__name__)
 

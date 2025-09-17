@@ -1,4 +1,3 @@
-# src/data_pipeline/loaders/abstract_loader.py
 from abc import ABC, abstractmethod
 import logging
 from dataclasses import dataclass, field

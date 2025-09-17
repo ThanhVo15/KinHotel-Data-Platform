@@ -1,4 +1,3 @@
-# E:\Job\Kin-Hotel\DE\KinHotelAutoDashboard\src\data_pipeline\processors\utils\date_utils.py
 import pandas as pd
 from datetime import date
 

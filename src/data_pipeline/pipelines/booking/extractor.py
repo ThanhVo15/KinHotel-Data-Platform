@@ -2,7 +2,6 @@ import aiohttp
 import logging
 from typing import Any, Dict, List
 
-# --- Import các thành phần từ core và utils ---
 from src.data_pipeline.core.pms.pms_extractor import PMSExtractor
 from src.data_pipeline.core.abstract_extractor import ExtractionResult
 from src.utils.date_params import DateWindow
@@ -48,7 +47,7 @@ class BookingExtractor(PMSExtractor):
         return await super().extract_async(
             branch_id=branch_id,
             params=api_params, 
-            update_from=date_window.start, # Truyền thêm thông tin này để lưu vào ExtractionResult
+            update_from=date_window.start,
             update_to=date_window.end,
             **kwargs
         )

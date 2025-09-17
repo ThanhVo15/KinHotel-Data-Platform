@@ -1,6 +1,6 @@
 import pandas as pd
 from typing import List, Dict, Any
-from ...core.abstract_parser import AbstractParser
+from src.data_pipeline.core.abstract_parser import AbstractParser
 
 class RoomLockParser(AbstractParser):
     """

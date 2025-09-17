@@ -1,4 +1,3 @@
-# E:\Job\Kin-Hotel\DE\KinHotelAutoDashboard\src\data_pipeline\extractors\abstract_extractor.py
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional, Tuple, List
 import asyncio

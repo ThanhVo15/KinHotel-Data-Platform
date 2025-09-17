@@ -1,4 +1,3 @@
-# src/data_pipeline/loaders/email_notifier.py
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -32,7 +31,7 @@ class EmailNotifier(AbstractLoader):
         template = self.jinja_env.get_template("report.template.html")
         return template.render(report=report_data)
 
-    # --- HÀM MỚI ĐỂ TẠO FILE CSV ĐÍNH KÈM ---
+    # --- HÀM TẠO FILE CSV ĐÍNH KÈM ---
     def _create_dq_attachment(self, dq_issues: List[Dict]) -> MIMEBase | None:
         """Tạo file báo cáo chất lượng dữ liệu (CSV) để đính kèm."""
         if not dq_issues:
@@ -62,7 +61,6 @@ class EmailNotifier(AbstractLoader):
             html_body = self._build_html_report(report_data)
             msg.attach(MIMEText(html_body, 'html'))
             
-            # --- BỔ SUNG LOGIC ĐÍNH KÈM FILE ---
             dq_issues = report_data.get("data_quality_issues")
             if dq_issues:
                 self.logger.info(f"Found {len(dq_issues)} data quality issues. Creating attachment...")

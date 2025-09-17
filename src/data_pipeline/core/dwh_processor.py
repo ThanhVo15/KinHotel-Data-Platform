@@ -1,4 +1,3 @@
-# src/data_pipeline/core/dwh_processor.py
 import pandas as pd
 from pathlib import Path
 from .abstract_processor import AbstractProcessor
@@ -14,7 +13,6 @@ class DWHModelProcessor(AbstractProcessor):
     def _read_current_data(self) -> pd.DataFrame:
         self.logger.info(f"Reading historical files for dataset '{self.dataset_name}' from {self.execution_historical_dir}")
         
-        # Sửa lại search_pattern để chỉ tìm đúng file của dataset
         search_pattern = f"**/{self.dataset_name}_history.parquet"
         
         historical_files = list(self.execution_historical_dir.glob(search_pattern))

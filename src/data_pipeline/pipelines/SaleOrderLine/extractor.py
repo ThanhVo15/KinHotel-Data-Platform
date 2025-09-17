@@ -1,4 +1,3 @@
-# src/data_pipeline/pipelines/odoo/extractor.py
 from src.data_pipeline.core.abstract_extractor import AbstractExtractor, ExtractionResult
 from src.data_pipeline.core.clients.odoo_client import OdooClient
 

@@ -1,4 +1,3 @@
-# src/data_pipeline/loaders/staging_loader.py
 import pandas as pd
 from pathlib import Path
 from typing import Optional

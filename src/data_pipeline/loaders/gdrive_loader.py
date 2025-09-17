@@ -1,9 +1,7 @@
-# src/data_pipeline/loaders/gdrive_loader.py
 from pathlib import Path
 import io
 from src.data_pipeline.core.abstract_loader import AbstractLoader, LoadingResult
 
-# Import các thư viện mới của Google
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
@@ -33,8 +31,7 @@ class GoogleDriveLoader(AbstractLoader):
             return self._folder_cache[cache_key]
 
         query = f"'{parent_folder_id}' in parents and name='{folder_name}' and mimeType='application/vnd.google-apps.folder' and trashed=false"
-        
-        # SỬA LỖI: Thêm supportsAllDrives và includeItemsFromAllDrives
+    
         response = self.service.files().list(
             q=query, 
             spaces='drive', 
@@ -55,7 +52,6 @@ class GoogleDriveLoader(AbstractLoader):
                 'parents': [parent_folder_id],
                 'mimeType': 'application/vnd.google-apps.folder'
             }
-            # SỬA LỖI: Thêm supportsAllDrives khi tạo folder
             folder = self.service.files().create(
                 body=file_metadata, 
                 fields='id',
@@ -85,7 +81,6 @@ class GoogleDriveLoader(AbstractLoader):
 
             file_name = local_file.name
             
-            # SỬA LỖI: Thêm supportsAllDrives và includeItemsFromAllDrives khi tìm file
             query = f"'{current_parent_id}' in parents and name='{file_name}' and trashed=false"
             response = self.service.files().list(
                 q=query, 
@@ -101,7 +96,6 @@ class GoogleDriveLoader(AbstractLoader):
             if existing_files: # File đã tồn tại -> Update
                 file_id = existing_files[0].get('id')
                 self.logger.info(f"Updating file: {relative_path}...")
-                # SỬA LỖI: Thêm supportsAllDrives khi update
                 self.service.files().update(
                     fileId=file_id, 
                     media_body=media,
@@ -111,7 +105,6 @@ class GoogleDriveLoader(AbstractLoader):
             else: # File chưa có -> Create
                 self.logger.info(f"Uploading new file: {relative_path}...")
                 file_metadata = {'name': file_name, 'parents': [current_parent_id]}
-                # SỬA LỖI: Thêm supportsAllDrives khi tạo file
                 self.service.files().create(
                     body=file_metadata, 
                     media_body=media, 

@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import List, Dict, Any # Bổ sung
+from typing import List, Dict, Any
 import time
 
 @dataclass
@@ -37,7 +37,6 @@ class AbstractProcessor(ABC):
         self.logger.info(f"🚀 Starting processor: {self.name}...")
         start_time = time.time()
         try:
-            # === SỬA LỖI: Gán result bên trong khối try ===
             result = self.process()
             if result.is_success:
                 self.logger.info(f"✅ Processor '{self.name}' completed successfully.")
@@ -45,10 +44,8 @@ class AbstractProcessor(ABC):
                 self.logger.error(f"❌ Processor '{self.name}' failed. Reason: {result.error}")
         except Exception as e:
             self.logger.exception(f"💥 Unhandled exception in processor '{self.name}': {e}")
-            # Tạo result trong khối except
             result = ProcessingResult(name=self.name, status="error", error=str(e))
         
-        # Bây giờ result luôn tồn tại
         end_time = time.time()
         result.duration_seconds = end_time - start_time
         self.logger.info(f" Processor '{self.name}' finished in {result.duration_seconds:.2f}s.")
